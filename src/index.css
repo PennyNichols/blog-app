@@ -9,10 +9,10 @@
   font-family: 'Poppins', sans-serif;
 }
 
-h1, h2, h3{
+/* h1, h2, h3{
   font-family: 'Lobster', cursive;
   
-}
+} */
 
 .nav-brand{
   font-family: 'Lobster', cursive;
@@ -22,6 +22,8 @@ h1, h2, h3{
   color: gray;
 }
 
-
+.nav-link{
+  cursor: pointer;
+}
 
 
