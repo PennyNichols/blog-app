@@ -11,5 +11,17 @@
 
 h1, h2, h3{
   font-family: 'Lobster', cursive;
+  
+}
 
+.nav-brand{
+  font-family: 'Lobster', cursive;
+  text-decoration: none;
+  font-size: 2rem;
+  letter-spacing:.1rem;
+  color: gray;
+}
+
+.nav-brand:hover{
+  color: rgb(55, 54, 54);
 }
