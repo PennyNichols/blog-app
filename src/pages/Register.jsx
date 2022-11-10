@@ -1,13 +1,34 @@
 import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { registerUser, signUpProvider } from "../helpers/firebase";
 
 const Register = () => {
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [name, setName] = useState();
+	const [email, setEmail] = useState();
+	const [password, setPassword] = useState();
+	const [error, setError] = useState(null);
 
 	const navigate = useNavigate();
+
+	const handleSignUp = async () => {
+		if (!name || !email || !password) {
+			setError("Invalid Entry");
+			return;
+		}
+		const message = await registerUser(email, password, name);
+		if (message) {
+			setError(message);
+		} else {
+			setError(null);
+			navigate("/login");
+		}
+	};
+
+    const handleProvider = () =>{
+        signUpProvider();
+        navigate('/');
+    }
 
 	return (
 		<div className="login p-5">
@@ -15,6 +36,7 @@ const Register = () => {
 				className="container-fluid p-4"
 				style={{ backgroundColor: "#d3d3d3e2", width: "24rem" }}
 			>
+                { error && <p className='text-danger' >{error}</p>}
 				<h2 className="pb-3">Sign Up</h2>
 				<Form>
 					<Form.Control
@@ -38,16 +60,16 @@ const Register = () => {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					
-					<Button className="my-2 w-100" type="button">
+
+					<Button className="my-2 w-100" type="button" onClick={handleSignUp}>
 						Sign Up
 					</Button>
 				</Form>
-				<Button className="w-100" type="button">
+				<Button className="w-100" type="button" onClick={handleProvider}>
 					Continue with Google
 				</Button>
 				<p className="mt-2">
-					Have an Account?{" "}Login{" "}
+					Have an Account? Login{" "}
 					<span
 						className="text-primary"
 						style={{ cursor: "pointer" }}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { login, signUpProvider } from "../helpers/firebase";
+import { login, signUpProvider, forgetPassword } from "../helpers/firebase";
 
 const Login = () => {
 	const [email, setEmail] = useState();
@@ -20,13 +20,18 @@ const Login = () => {
 			setError(message);
 		} else {
 			setError(null);
-			navigate("");
+			navigate("/");
 		}
 	};
 
     const handleProvider = () => {
         signUpProvider();
         navigate('/')
+    }
+
+    const forgetPasswordHandler = async(email) => {
+        const message = await forgetPassword(email);
+        if(message) setError(message)
     }
 
 	return (
@@ -54,6 +59,7 @@ const Login = () => {
 					<Form.Text
 						style={{ cursor: "pointer" }}
 						className="muted text-primary"
+                        onClick={()=>forgetPasswordHandler(email)}
 					>
 						Forget Password?
 					</Form.Text>
