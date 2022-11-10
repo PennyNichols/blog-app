@@ -46,7 +46,10 @@ const Navigation = () => {
 								<Nav.Item className="nav-link" onClick={handleLogin}>
 									Login
 								</Nav.Item>
-								<Nav.Item className="nav-link" onClick={()=>navigate('/register')}>
+								<Nav.Item
+									className="nav-link"
+									onClick={() => navigate("/register")}
+								>
 									Register
 								</Nav.Item>
 							</>
