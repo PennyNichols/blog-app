@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Navigation from '../components/Navigation'
+import AuthProvider from '../contexts/AuthContext'
 import About from '../pages/About'
 import Dashboard from '../pages/Dashboard'
 import Details from '../pages/Details'
@@ -14,7 +15,7 @@ import PrivateRouter from './PrivateRouter'
 const AppRouter = () => {
     const [isAuth, setIsAuth] = useState(true)
   return (
-    <>
+    <AuthProvider>
       <Navigation />
       <Routes>
         {/* public routes */}
@@ -38,7 +39,7 @@ const AppRouter = () => {
             <Route path='' element={<Profile />}/>
         </Route>
       </Routes>
-    </>
+    </AuthProvider>
   )
 }
 
