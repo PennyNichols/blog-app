@@ -1,43 +1,47 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import {GiNotebook} from 'react-icons/gi'
+import { GiNotebook } from "react-icons/gi";
+import { AuthContext } from "../contexts/AuthContext";
+import { logout } from "../helpers/firebase";
 
 const Navigation = () => {
-	const [isAuth, setIsAuth] = useState(true);
 	const navigate = useNavigate();
 
+	let { currentUser } = useContext(AuthContext);
+
 	const handleLogout = () => {
-		setIsAuth(false);
-	};
-	const handleLogin = () => {
-		setIsAuth(true);
+		logout();
 		navigate("/login");
 	};
+
 	return (
 		<Navbar bg="light" expand="lg">
 			<Container>
-				<Link to="" >
-					<GiNotebook className="nav-brand"/>
+				<Link to="">
+					<GiNotebook className="nav-brand" />
 				</Link>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="ms-auto">
-						{isAuth ? (
+						{currentUser ? (
 							<>
 								<Link className="nav-link" to="/profile">
-									Profile
+									{currentUser ? currentUser.displayName : "Profile"}
 								</Link>
 								<Link className="nav-link" to="/new-blog">
 									New
 								</Link>
-								<Link className="nav-link" to="/login" onClick={handleLogout}>
+								<Nav.Item className="nav-link" onClick={handleLogout}>
 									Logout
-								</Link>
+								</Nav.Item>
 							</>
 						) : (
 							<>
-								<Nav.Item className="nav-link" onClick={handleLogin}>
+								<Nav.Item
+									className="nav-link"
+									onClick={() => navigate("/login")}
+								>
 									Login
 								</Nav.Item>
 								<Nav.Item
