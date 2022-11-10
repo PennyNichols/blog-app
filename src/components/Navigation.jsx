@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import {GiNotebook} from 'react-icons/gi'
 
 const Navigation = () => {
 	const [isAuth, setIsAuth] = useState(true);
@@ -16,15 +17,8 @@ const Navigation = () => {
 	return (
 		<Navbar bg="light" expand="lg">
 			<Container>
-				<Link to="" className="nav-brand">
-					<img
-						className="logo"
-						src="https://github.com/PennyNichols/blog-app/blob/master/src/assets/logo.png?raw=true"
-						alt="Penny Nichols"
-						style={{
-							height: "3.5rem",
-						}}
-					/>
+				<Link to="" >
+					<GiNotebook className="nav-brand"/>
 				</Link>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">

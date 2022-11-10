@@ -1,21 +1,38 @@
 import React, { useState } from "react";
-import { Container, Form } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
 	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+    const navigate = useNavigate()
 
 	return (
-		<div className="login" style={{backgroundImage: 'linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url('../assets/login-bg.jpg')'}}>
-            <h2>Login</h2>
-			<Container>
+		<div className="login p-5" >
+			<Container className='container-fluid p-4' style={{backgroundColor: '#d3d3d3e2', width: '24rem'}}>
+                <h2 className='pb-3' >Login</h2>
 				<Form>
 					<Form.Control
+                        type='text'
 						placeholder="Email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
+					<Form.Control
+                        className='my-2'
+                        type='password'
+						placeholder="Password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+                    <Form.Text style={{cursor: 'pointer'}} className='muted text-primary'>Forget Password?</Form.Text>
+                    <br/>
+                    <Button className='my-2 w-100' type='button'>Login</Button>
 				</Form>
+                <Button className='w-100' type='button'>Continue with Google</Button>
+                <p className="mt-2">Need an Account? <span className='text-primary' style={{cursor: 'pointer'}} onClick={()=>navigate('/register')}>Sign Up.</span></p>
 			</Container>
 		</div>
 	);
