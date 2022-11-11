@@ -2,9 +2,10 @@ import React, { useContext } from 'react'
 import { AuthContext } from '../contexts/AuthContext';
 
 const Profile = () => {
-    const {currentUser } = useContext(AuthContext);
+    const {userId, currentUser, name } = useContext(AuthContext);
 
-    console.log(currentUser.uid)
+    console.log(currentUser.displayName)
+
   return (
     <div>Profile</div>
   )
