@@ -35,7 +35,7 @@ const Login = () => {
     }
 
 	return (
-		<div className="login p-5">
+		<div className="p-5">
 			<Container
 				className="container-fluid p-4"
 				style={{ backgroundColor: "#d3d3d3e2", width: "24rem" }}
