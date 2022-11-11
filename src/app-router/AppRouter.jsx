@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navigation from "../components/Navigation";
-import AuthProvider from "../contexts/AuthContext";
+import { AuthContext } from "../contexts/AuthContext";
 import About from "../pages/About";
 import Dashboard from "../pages/Dashboard";
 import Details from "../pages/Details";
@@ -13,9 +13,8 @@ import UpdateBlog from "../pages/UpdateBlog";
 import PrivateRouter from "./PrivateRouter";
 
 const AppRouter = () => {
-	const [isAuth, setIsAuth] = useState(true);
+    const {currentUser } = useContext(AuthContext);
 	return (
-		<AuthProvider>
 			<div className="page">
 				<Navigation />
 				<Routes>
@@ -23,31 +22,30 @@ const AppRouter = () => {
 					<Route path="" element={<Dashboard />} />
 					<Route
 						path="/login"
-						element={<Login setIsAuth={setIsAuth} isAuth={isAuth} />}
+						element={<Login  />}
 					/>
 					<Route path="/register" element={<Register />} />
 					{/* private routes */}
-					<Route path="/about" element={<PrivateRouter isAuth={isAuth} />}>
+					<Route path="/about" element={<PrivateRouter currentUser={currentUser} />}>
 						<Route path="" element={<About />} />
 					</Route>
-					<Route path="/details" element={<PrivateRouter isAuth={isAuth} />}>
+					<Route path="/details" element={<PrivateRouter currentUser={currentUser} />}>
 						<Route path="" element={<Details />} />
 					</Route>
-					<Route path="/new-blog" element={<PrivateRouter isAuth={isAuth} />}>
+					<Route path="/new-blog" element={<PrivateRouter currentUser={currentUser} />}>
 						<Route path="" element={<NewBlog />} />
 					</Route>
 					<Route
 						path="/update-blog"
-						element={<PrivateRouter isAuth={isAuth} />}
+						element={<PrivateRouter currentUser={currentUser} />}
 					>
 						<Route path="" element={<UpdateBlog />} />
 					</Route>
-					<Route path="/profile" element={<PrivateRouter isAuth={isAuth} />}>
+					<Route path="/profile" element={<PrivateRouter currentUser={currentUser} />}>
 						<Route path="" element={<Profile />} />
 					</Route>
 				</Routes>
 			</div>
-		</AuthProvider>
 	);
 };
 

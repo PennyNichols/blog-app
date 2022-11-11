@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom"
 
-const PrivateRouter=({isAuth}) => {
-    return( isAuth ? <Outlet/> : <Navigate to='/login'/>)
+const PrivateRouter=({currentUser}) => {
+    return( currentUser ? <Outlet/> : <Navigate to='/login'/>)
 }
 
 export default PrivateRouter

@@ -1,35 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { registerUser, signUpProvider } from "../helpers/firebase";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Register = () => {
-	const [name, setName] = useState();
-	const [email, setEmail] = useState();
-	const [password, setPassword] = useState();
-	const [error, setError] = useState(null);
+    const { name, setName, email, setEmail, password, setPassword, error, setError, handleSignUp, handleProvider, navigate } = useContext(AuthContext);
+	
 
-	const navigate = useNavigate();
 
-	const handleSignUp = async () => {
-		if (!name || !email || !password) {
-			setError("Invalid Entry");
-			return;
-		}
-		const message = await registerUser(email, password, name);
-		if (message) {
-			setError(message);
-		} else {
-			setError(null);
-			navigate("/login");
-		}
-	};
-
-    const handleProvider = () =>{
-        signUpProvider();
-        navigate('/');
-    }
-
+	
 	return (
 		<div className="login p-5">
 			<Container
