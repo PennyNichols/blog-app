@@ -30,6 +30,9 @@ const AuthProvider = (props) => {
 			setError(message);
 		} else {
 			setError(null);
+            setName();
+            setEmail();
+            setPassword();
 			navigate("/login");
 		}
 	};
@@ -48,6 +51,9 @@ const AuthProvider = (props) => {
 			setError(message);
 		} else {
 			setError(null);
+            setName();
+            setEmail();
+            setPassword();
 			navigate("/");
             toast.success('Welcome Back!')
 		}
