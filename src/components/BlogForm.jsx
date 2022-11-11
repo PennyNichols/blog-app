@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { AuthContext } from "../contexts/AuthContext";
+import { BlogContext } from "../contexts/BlogContext";
 
 const BlogForm = () => {
-	const [title, setTitle] = useState();
-	const [imgUrl, setImgUrl] = useState();
-	const [content, setContent] = useState();
-	const handleNewBlog = () => {};
+	const { currentUser } = useContext(AuthContext);
+	const {
+		title,
+		imgUrl,
+		body,
+		setTitle,
+		setImgUrl,
+		setBody,
+		writeToDatabase,
+		blogs,
+		deleteBlog,
+		updateBlog,
+		edit,
+		setEdit,
+		setUpdateId,
+		handleSubmit,
+        userId,
+	} = useContext(BlogContext);
 
 	return (
 		<div>
@@ -15,7 +31,7 @@ const BlogForm = () => {
 					style={{ backgroundColor: "#d3d3d3e2", width: "24rem" }}
 				>
 					<h2 className="pb-3">New Post</h2>
-					<Form>
+					<Form onSubmit={handleSubmit}>
 						<Form.Control
 							type="text"
 							placeholder="Title"
@@ -30,18 +46,14 @@ const BlogForm = () => {
 							onChange={(e) => setImgUrl(e.target.value)}
 						/>
 						<Form.Control
-                            placeholder='Write post details here'
+							placeholder="Write post details here"
 							as="textarea"
 							rows={5}
 							className="my-2"
-							value={content}
-							onChange={(e) => setContent(e.target.value)}
+							value={body}
+							onChange={(e) => setBody(e.target.value)}
 						/>
-						<Button
-							className="my-2 w-100"
-							type="submit"
-							onClick={handleNewBlog}
-						>
+						<Button className="my-2 w-100" type="submit">
 							Submit
 						</Button>
 					</Form>

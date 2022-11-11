@@ -8,12 +8,9 @@ import { logout } from "../helpers/firebase";
 const Navigation = () => {
 	const navigate = useNavigate();
 
-	let { currentUser } = useContext(AuthContext);
+	let { currentUser, handleLogout } = useContext(AuthContext);
 
-	const handleLogout = () => {
-		logout();
-		navigate("/login");
-	};
+
 
 	return (
 		<Navbar bg="light" expand="lg">
