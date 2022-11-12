@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { AuthContext } from "../contexts/AuthContext";
 import { BlogContext } from "../contexts/BlogContext";
 
 const BlogForm = () => {
@@ -11,15 +10,8 @@ const BlogForm = () => {
 		setTitle,
 		setImgUrl,
 		setBody,
-		writeToDatabase,
-		blogs,
-		deleteBlog,
-		updateBlog,
 		edit,
-		setEdit,
-		setUpdateId,
 		handleSubmit,
-        userId,
 	} = useContext(BlogContext);
 
 	return (

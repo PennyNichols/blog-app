@@ -1,21 +1,19 @@
 import React, { useContext } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { GiNotebook } from "react-icons/gi";
 import { AuthContext } from "../contexts/AuthContext";
-import { logout } from "../helpers/firebase";
 
 const Navigation = () => {
-	const navigate = useNavigate();
 
-	let { currentUser, handleLogout } = useContext(AuthContext);
+	let { currentUser, handleLogout, navigate } = useContext(AuthContext);
 
 
 
 	return (
 		<Navbar bg="light" expand="lg">
 			<Container>
-				<Link to="">
+				<Link to="/">
 					<GiNotebook className="nav-brand" />
 				</Link>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />

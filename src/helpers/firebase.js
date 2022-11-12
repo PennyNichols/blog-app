@@ -58,15 +58,12 @@ export const login = async (email, password) => {
 };
 
 // user observer
-export const userObserver = (setCurrentUser, setUserId) => {
+export const userObserver = (setCurrentUser) => {
 	onAuthStateChanged(auth, (user) => {
 		if (user) {
 			setCurrentUser(user);
-			const uid = (user.uid);
-            setUserId(uid)
 		} else {
 			setCurrentUser(null);
-			setUserId(null);
 		}
 	});
 };

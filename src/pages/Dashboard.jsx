@@ -19,8 +19,8 @@ const Dashboard = () => {
 				></div>{" "}
 			</div>
 			<div className='d-flex flex-wrap p-3 gap-3'>
-				{blogs.map((blog, index) => {
-					return <BlogCard key={index} blog={blog} />;
+				{blogs.map(blog => {
+					return <BlogCard key={blog.id} blog={blog} />;
 				})}
 			</div>
 		</div>

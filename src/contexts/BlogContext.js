@@ -8,7 +8,7 @@ import { AuthContext } from "./AuthContext";
 export const BlogContext = createContext();
 
 const BlogProvider = ({ children }) => {
-	const { currentUser, name } = useContext(AuthContext);
+	const { currentUser } = useContext(AuthContext);
 
 	const [title, setTitle] = useState("");
 	const [imgUrl, setImgUrl] = useState("");
@@ -41,6 +41,7 @@ const BlogProvider = ({ children }) => {
 				blogArr.push({ id, ...data[id] });
 			}
 			setBlogs(blogArr);
+            console.log(blogs)
 		});
 	}, []);
 

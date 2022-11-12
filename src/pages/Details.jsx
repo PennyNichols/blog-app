@@ -1,8 +1,11 @@
 import React from 'react'
 
+
 const Details = () => {
-  return (
-    <div>Details</div>
+    // const { blogs } = useContext(BlogContext);
+    // const {id} = useParams()
+    return (
+    <div>blog.title</div>
   )
 }
 
