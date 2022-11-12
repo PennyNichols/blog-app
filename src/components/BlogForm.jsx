@@ -4,7 +4,6 @@ import { AuthContext } from "../contexts/AuthContext";
 import { BlogContext } from "../contexts/BlogContext";
 
 const BlogForm = () => {
-	const { currentUser } = useContext(AuthContext);
 	const {
 		title,
 		imgUrl,
@@ -54,7 +53,7 @@ const BlogForm = () => {
 							onChange={(e) => setBody(e.target.value)}
 						/>
 						<Button className="my-2 w-100" type="submit">
-							Submit
+							{edit ? 'Update' : 'Submit'}
 						</Button>
 					</Form>
 				</Container>
