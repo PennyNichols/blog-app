@@ -1,4 +1,6 @@
 import React, { useContext } from 'react'
+import ProfileCard from '../components/ProfileCard';
+import ProfileForm from '../components/ProfileForm';
 import { AuthContext } from '../contexts/AuthContext';
 
 const Profile = () => {
@@ -7,7 +9,10 @@ const Profile = () => {
     console.log(currentUser.displayName)
 
   return (
-    <div>Profile</div>
+    <div className='d-flex justify-content-around'>
+        <ProfileForm/>
+        <ProfileCard/>
+    </div>
   )
 }
 

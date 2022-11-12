@@ -6,45 +6,44 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 
-export const BlogContext = createContext();
+export const ProfileContext = createContext();
 
-const BlogProvider = ({ children }) => {
+const ProfileProvider = ({ children }) => {
 	const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate()
 
-	const [title, setTitle] = useState("");
 	const [imgUrl, setImgUrl] = useState("");
-	const [body, setBody] = useState("");
-	const [blogs, setBlogs] = useState([]);
+	const [hometown, setHometown] = useState("");
+	const [hobbies, setHobbies] = useState("");
+	const [profiles, setProfiles] = useState("");
+	const [authorBlogs, setAuthorBlogs] = useState([]);
 	const [edit, setEdit] = useState(false);
 	const [updateId, setUpdateId] = useState("");
-    const [postId, setPostId] = useState('')
 
 	const writeToDatabase = () => {
-		const blogRef = ref(db, "Blog");
-		const newBlogRef = push(blogRef);
-		set(newBlogRef, {
-			title: title,
+		const profileRef = ref(db, "Profile");
+		const newProfileRef = push(profileRef);
+		set(newProfileRef, {
+			hometown: hometown,
 			imgUrl: imgUrl,
-			body: body,
+			hobbies: hobbies,
             author: currentUser.displayName,
             userId: currentUser.uid,
 		});
-		setTitle("");
+		setHometown("");
 		setImgUrl("");
-		setBody("");
+		setHobbies("");
 	};
 
 	useEffect(() => {
-		const blogRef = ref(db, "Blog");
-		onValue(blogRef, (snapshot) => {
+		const profileRef = ref(db, "Profile");
+		onValue(profileRef, (snapshot) => {
 			const data = snapshot.val();
-			const blogArr = [];
+			const profileArr = [];
 			for (let id in data) {
-				blogArr.push({ id, ...data[id] });
+				profileArr.push({ id, ...data[id] });
 			}
-			setBlogs(blogArr);
-            console.log(blogs)
+			setProfiles(profileArr);
 		});
 	}, []);
 
@@ -52,50 +51,50 @@ const BlogProvider = ({ children }) => {
 		e.preventDefault();
 		if (!edit) {
 			writeToDatabase();
-			setTitle("");
+			setHometown("");
 			setImgUrl("");
-			setBody("");
-			toast.success("New Blog Added");
+			setHobbies("");
+			toast.success("New Profile Added");
 		} else {
-			updateBlog();
+			updateProfile();
 		}
 	};
 
-	const deleteBlog = (id) => {
-		remove(ref(db, "Blog/" + id));
-		toast.error("Blog deleted");
+	const deleteProfile = (id) => {
+		remove(ref(db, "Profile/" + id));
+		toast.error("Profile deleted");
         navigate('/')
 	};
 
-	const updateBlog = () => {
-		update(ref(db, "Blog/" + updateId), {
-			title: title,
+	const updateProfile = () => {
+		update(ref(db, "Profile/" + updateId), {
+			hometown: hometown,
 			imgUrl: imgUrl,
-			body: body,
+			hobbies: hobbies,
             author: currentUser.displayName,
             userId: currentUser.uid,
 		});
-		setTitle("");
+		setHometown("");
 		setImgUrl("");
-		setBody("");
+		setHobbies("");
 		setEdit(false);
 		setUpdateId("");
-		toast.success("Blog Updated");
+		toast.success("Profile Updated");
 	};
 
 	return (
-		<BlogContext.Provider
+		<ProfileContext.Provider
 			value={{
-				title,
+				hometown,
 				imgUrl,
-				body,
-				setTitle,
+				hobbies,
+				setHometown,
 				setImgUrl,
-				setBody,
+				setHobbies,
 				writeToDatabase,
-				blogs,
-				deleteBlog,
-				updateBlog,
+				profiles,
+				deleteProfile,
+				updateProfile,
 				edit,
 				setEdit,
 				setUpdateId,
@@ -103,8 +102,8 @@ const BlogProvider = ({ children }) => {
 			}}
 		>
 			{children}
-		</BlogContext.Provider>
+		</ProfileContext.Provider>
 	);
 };
 
-export default BlogProvider;
+export default ProfileProvider;

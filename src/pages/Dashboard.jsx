@@ -15,7 +15,7 @@ const Dashboard = () => {
 					className="mx-2 mb-2"
 					style={{ height: "5px", width: "100px", backgroundColor: "white" }}
 				></div>
-				<h1 className="text-light">Dashboard</h1>
+				<h1 className="text-light my-3">Dashboard</h1>
 				<div
 					className="mx-2 mb-2"
 					style={{ height: "5px", width: "100px", backgroundColor: "white" }}
