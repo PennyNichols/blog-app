@@ -29,7 +29,7 @@ const AppRouter = () => {
 					<Route path="/about" element={<PrivateRouter currentUser={currentUser} />}>
 						<Route path="" element={<About />} />
 					</Route>
-					<Route path="/details" element={<PrivateRouter currentUser={currentUser} />}>
+					<Route path="/details/:id" element={<PrivateRouter currentUser={currentUser} />}>
 						<Route path="" element={<Details />} />
 					</Route>
 					<Route path="/new-blog" element={<PrivateRouter currentUser={currentUser} />}>

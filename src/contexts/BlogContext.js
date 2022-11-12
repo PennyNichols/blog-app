@@ -16,6 +16,7 @@ const BlogProvider = ({ children }) => {
 	const [blogs, setBlogs] = useState([]);
 	const [edit, setEdit] = useState(false);
 	const [updateId, setUpdateId] = useState("");
+    const [postId, setPostId] = useState('')
 
 	const writeToDatabase = () => {
 		const blogRef = ref(db, "Blog");

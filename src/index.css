@@ -29,8 +29,10 @@
 
 .page{
   background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url('https://github.com/PennyNichols/blog-app/blob/master/src/assets/login-bg.jpg?raw=true');
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   background-size: cover;
   background-attachment:fixed;
+  padding-bottom: 1rem;
 }
 

@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
 import BlogCard from "../components/BlogCard";
+import { AuthContext } from "../contexts/AuthContext";
 import { BlogContext } from "../contexts/BlogContext";
 
 const Dashboard = () => {
 	const { blogs } = useContext(BlogContext);
+	const { currentUser } = useContext(AuthContext);
+    console.log(currentUser)
 	console.log(blogs);
 	return (
-		<div style={{backgroundColor: '#606060'}}>
+		<div >
 			<div className="d-flex justify-content-center align-items-center">
 				<div
 					className="mx-2 mb-2"
@@ -18,7 +21,7 @@ const Dashboard = () => {
 					style={{ height: "5px", width: "100px", backgroundColor: "white" }}
 				></div>{" "}
 			</div>
-			<div className='d-flex flex-wrap p-3 gap-3'>
+			<div className='d-flex flex-wrap p-3 gap-3 justify-content-center'>
 				{blogs.map(blog => {
 					return <BlogCard key={blog.id} blog={blog} />;
 				})}
