@@ -18,7 +18,7 @@ const BlogForm = () => {
 		<div>
 			<div className="p-5">
 				<Container
-					className="container-fluid p-4"
+					className="container-fluid p-4 rounded shadow-lg"
 					style={{ backgroundColor: "#d3d3d3e2", width: "24rem" }}
 				>
 					<h2 className="pb-3">New Post</h2>

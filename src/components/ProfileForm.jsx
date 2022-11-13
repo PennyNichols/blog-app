@@ -16,37 +16,28 @@ const ProfileForm = () => {
         profiles,
 		handleSubmit,
 		edit,
+        isFound,
+        setIsFound,
         handleReject
 	} = useContext(ProfileContext);
 	const {currentUser, navigate	} = useContext(AuthContext);
 
-    const isFound = profiles.some(profile =>{
+    const found = profiles.some(profile =>{
         if(profile.userId === currentUser.uid){
             return true;
         }
         return false;
     });
 
-    const handleProfileSubmit = () =>{
-        if (!isFound){
-            handleSubmit()
-        }
-        if(isFound && !edit){
-            handleReject()
-            navigate('/about')
-        }
-    }
-
-    console.log(isFound)
-
+    setIsFound(found)
 
 	return (
 		<Container
-			className="container-fluid p-4"
+			className="container-fluid p-4 rounded shadow-lg"
 			style={{ backgroundColor: "#d3d3d3e2", width: "24rem" }}
 		>
 			<h2 className="pb-3">Profile Details</h2>
-			<Form onSubmit={handleProfileSubmit}>
+			<Form onSubmit={handleSubmit}>
 				<Form.Control
 					type="text"
 					placeholder="Hometown"

@@ -34,7 +34,7 @@ const Details = () => {
 	};
 
 	return (
-		<div className="m-5 p-4" style={{ backgroundColor: "#d3d3d3e2" }}>
+		<div className="m-5 p-4 rounded shadow-lg" style={{ backgroundColor: "#d3d3d3e2" }}>
 			<img className="mb-4" style={{height:'18rem'}} src={imgUrl} alt={title} />
 			<h1 className="mb-4">{title}</h1>
 			<h2 className="mb-4">Written by: {author ? author : "Anonymous"}</h2>
@@ -60,7 +60,7 @@ const Details = () => {
                         <Link style={{textDecoration:'none', textTransform:'uppercase'}} to="/about"><h4 className='mt-3' >About our authors</h4></Link>
 				</>
 			) : (
-				<Link style={{textDecoration:'none', textTransform:'uppercase'}} to="/about"><h4 className='mt-3' >About our authors</h4></Link>
+				<Link style={{textDecoration:'none', textTransform:'uppercase'}} to="/about"><h4 className='mt-3' >meet the author</h4></Link>
 			)}
 		</div>
 	);

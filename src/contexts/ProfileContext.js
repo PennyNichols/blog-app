@@ -20,6 +20,7 @@ const ProfileProvider = ({ children }) => {
 	const [authorBlogs, setAuthorBlogs] = useState([]);
 	const [edit, setEdit] = useState(false);
 	const [updateId, setUpdateId] = useState("");
+	const [isFound, setIsFound] = useState(false);
 
 	const writeToDatabase = () => {
 		const profileRef = ref(db, "Profile");
@@ -28,7 +29,7 @@ const ProfileProvider = ({ children }) => {
 			hometown: hometown,
 			imgUrl: imgUrl,
 			hobbies: hobbies,
-            email: email,
+			email: email,
 			author: currentUser.displayName,
 			userId: currentUser.uid,
 		});
@@ -52,17 +53,21 @@ const ProfileProvider = ({ children }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (!edit) {
+		if (!edit && !isFound) {
 			writeToDatabase();
 			setHometown("");
 			setImgUrl("");
 			setHobbies("");
 			setEmail("");
 			toast.success("New Profile Added");
-		} else {
-			updateProfile();
+		} else if (isFound) {
+			if (edit) {
+				updateProfile();
+			} else {
+				handleReject();
+			}
 		}
-        navigate('/about')
+		navigate("/about");
 	};
 
 	const deleteProfile = (id) => {
@@ -76,7 +81,7 @@ const ProfileProvider = ({ children }) => {
 			hometown: hometown,
 			imgUrl: imgUrl,
 			hobbies: hobbies,
-            email: email,
+			email: email,
 			author: currentUser.displayName,
 			userId: currentUser.uid,
 		});
@@ -89,15 +94,14 @@ const ProfileProvider = ({ children }) => {
 		toast.success("Profile Updated");
 	};
 
-    const handleReject = () => {
-        setHometown("");
+	const handleReject = () => {
+		setHometown("");
 		setImgUrl("");
 		setHobbies("");
 		setEmail("");
-        toast.error("Profile already exists for this user")
-    }
-
-  
+		// navigate("/about");
+		toast.error("Profile already exists for this user");
+	};
 
 	return (
 		<ProfileContext.Provider
@@ -108,8 +112,8 @@ const ProfileProvider = ({ children }) => {
 				setHometown,
 				setImgUrl,
 				setHobbies,
-                email,
-                setEmail,
+				email,
+				setEmail,
 				writeToDatabase,
 				profiles,
 				deleteProfile,
@@ -118,7 +122,9 @@ const ProfileProvider = ({ children }) => {
 				setEdit,
 				setUpdateId,
 				handleSubmit,
-                handleReject,
+				handleReject,
+				isFound,
+				setIsFound,
 			}}
 		>
 			{children}

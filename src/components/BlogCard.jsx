@@ -13,7 +13,7 @@ const BlogCard = (props) => {
 
 	return (
 		<div
-			className="rounded shadow  p-2"
+			className="rounded shadow-lg  p-2"
 			style={{ width: "25rem", backgroundColor: "#d3d3d3e2", cursor:'pointer' }}
 			onClick={handleDetails}
 		>
