@@ -24,12 +24,12 @@ const ProfileCard = (props) => {
 
 	return (
 		<div
-			className="rounded shadow-lg  p-2"
+			className="rounded shadow-lg  p-2 d-flex flex-column"
 			style={{ width: "25rem", backgroundColor: "#d3d3d3e2"}}
 		>
 			<img
-				classNames="d-block m-auto my-3"
-				style={{ width: "10rem" }}
+				classNames=" my-3"
+				style={{ width: "10rem", alignSelf:'center' }}
 				src={imgUrl}
 				alt={author}
 			/>

@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Card } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContext";
+import defaultImg from '../assets/login-bg.jpg'
 
 const BlogCard = (props) => {
 	const { imgUrl, title, body, author, id, userId } = props.blog;
@@ -11,6 +12,8 @@ const BlogCard = (props) => {
         
     }
 
+
+
 	return (
 		<div
 			className="rounded shadow-lg  p-2"
@@ -20,7 +23,7 @@ const BlogCard = (props) => {
 			<img
 				classNames="d-block m-auto"
 				style={{ width: "10rem" }}
-				src={imgUrl}
+				src={imgUrl || defaultImg}
 				alt={title}
 			/>
 			<Card.Body>
