@@ -38,7 +38,7 @@ const AuthProvider = (props) => {
             setName();
             setEmail();
             setPassword();
-			navigate("/login");
+			navigate("/");
 		}
 	};
 
