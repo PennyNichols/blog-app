@@ -89,6 +89,14 @@ const ProfileProvider = ({ children }) => {
 		toast.success("Profile Updated");
 	};
 
+    const handleReject = () => {
+        setHometown("");
+		setImgUrl("");
+		setHobbies("");
+		setEmail("");
+        toast.error("Profile already exists for this user")
+    }
+
   
 
 	return (
@@ -110,6 +118,7 @@ const ProfileProvider = ({ children }) => {
 				setEdit,
 				setUpdateId,
 				handleSubmit,
+                handleReject,
 			}}
 		>
 			{children}

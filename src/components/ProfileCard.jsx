@@ -28,19 +28,19 @@ const ProfileCard = (props) => {
 			style={{ width: "25rem", backgroundColor: "#d3d3d3e2"}}
 		>
 			<img
-				classNames="d-block m-auto"
+				classNames="d-block m-auto my-3"
 				style={{ width: "10rem" }}
 				src={imgUrl}
 				alt={author}
 			/>
 			<Card.Body>
-				<Card.Title>{author}</Card.Title>
-				<Card.Subtitle>{hometown}</Card.Subtitle>
-				<Card.Text>{hobbies}</Card.Text>
+				<Card.Title className='my-2'>{author}</Card.Title>
+				<Card.Subtitle className='my-2'>{hometown}</Card.Subtitle>
+				<Card.Text className='my-2'>{hobbies}</Card.Text>
 			</Card.Body>
             {currentUser.uid === userId ? (
 				<>
-					<div className="d-flex gap-3 justify-content-center">
+					<div className="d-flex gap-3 justify-content-center my-3">
 						<button
 							style={{ backgroundColor: "transparent", border: "none" }}
 							type="button"
@@ -56,10 +56,9 @@ const ProfileCard = (props) => {
 							<RiDeleteBinFill style={{ fontSize: "2rem", color: "red" }} />
 						</button>
 					</div>
-                    <a href={`mailto:${email}`}>Send Fan Mail</a>
 				</>
 			) : (
-				<a href={`mailto:${email}`}>Send Fan Mail</a>
+				<a style={{textDecoration:'none', textTransform:'uppercase'}} href={`mailto:${email}`}>Send some love</a>
 			)}
 		</div>
     )

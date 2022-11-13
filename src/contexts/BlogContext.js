@@ -58,6 +58,7 @@ const BlogProvider = ({ children }) => {
 		} else {
 			updateBlog();
 		}
+        navigate('/')
 	};
 
 	const deleteBlog = (id) => {

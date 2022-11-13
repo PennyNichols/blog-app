@@ -1,20 +1,44 @@
 import React, { useContext } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { AuthContext } from "../contexts/AuthContext";
 import { ProfileContext } from "../contexts/ProfileContext";
 
 const ProfileForm = () => {
-    const {
-        hometown,
-        setHometown,
-        imgUrl,
-        setImgUrl,
-        hobbies,
-        setHobbies,
-        email,
-        setEmail,
-        handleSubmit,
-        edit,
-    } = useContext(ProfileContext);
+	const {
+		hometown,
+		setHometown,
+		imgUrl,
+		setImgUrl,
+		hobbies,
+		setHobbies,
+		email,
+		setEmail,
+        profiles,
+		handleSubmit,
+		edit,
+        handleReject
+	} = useContext(ProfileContext);
+	const {currentUser, navigate	} = useContext(AuthContext);
+
+    const isFound = profiles.some(profile =>{
+        if(profile.userId === currentUser.uid){
+            return true;
+        }
+        return false;
+    });
+
+    const handleProfileSubmit = () =>{
+        if (!isFound){
+            handleSubmit()
+        }
+        if(isFound && !edit){
+            handleReject()
+            navigate('/about')
+        }
+    }
+
+    console.log(isFound)
+
 
 	return (
 		<Container
@@ -22,7 +46,7 @@ const ProfileForm = () => {
 			style={{ backgroundColor: "#d3d3d3e2", width: "24rem" }}
 		>
 			<h2 className="pb-3">Profile Details</h2>
-			<Form  onSubmit={handleSubmit}>
+			<Form onSubmit={handleProfileSubmit}>
 				<Form.Control
 					type="text"
 					placeholder="Hometown"
@@ -38,7 +62,8 @@ const ProfileForm = () => {
 				/>
 				<Form.Control
 					className="my-2"
-					type="text"
+					as="textarea"
+					rows={3}
 					placeholder="Hobbies"
 					value={hobbies}
 					onChange={(e) => setHobbies(e.target.value)}
@@ -52,7 +77,7 @@ const ProfileForm = () => {
 				/>
 				<br />
 				<Button className="my-2 w-100" type="submit">
-                    {edit ? 'Update' : 'Submit'}
+					{edit ? "Update" : "Submit"}
 				</Button>
 			</Form>
 		</Container>
