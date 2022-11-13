@@ -6,7 +6,6 @@ const BlogCard = (props) => {
 	const { imgUrl, title, body, author, id, userId } = props.blog;
 
     let { navigate } = useContext(AuthContext);
-    console.log(id)
     const handleDetails = () => {
         navigate(`/details/${id}`, {state: {id, author, body, imgUrl, title, userId}})
         
