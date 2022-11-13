@@ -1,13 +1,9 @@
 import React, { useContext } from "react";
 import BlogCard from "../components/BlogCard";
-import { AuthContext } from "../contexts/AuthContext";
 import { BlogContext } from "../contexts/BlogContext";
 
 const Dashboard = () => {
 	const { blogs } = useContext(BlogContext);
-	const { currentUser } = useContext(AuthContext);
-    console.log(currentUser)
-	console.log(blogs);
 	return (
 		<div >
 			<div className="d-flex justify-content-center align-items-center">

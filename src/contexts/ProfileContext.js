@@ -10,12 +10,13 @@ export const ProfileContext = createContext();
 
 const ProfileProvider = ({ children }) => {
 	const { currentUser } = useContext(AuthContext);
-    const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	const [imgUrl, setImgUrl] = useState("");
 	const [hometown, setHometown] = useState("");
 	const [hobbies, setHobbies] = useState("");
-	const [profiles, setProfiles] = useState("");
+	const [email, setEmail] = useState("");
+	const [profiles, setProfiles] = useState([]);
 	const [authorBlogs, setAuthorBlogs] = useState([]);
 	const [edit, setEdit] = useState(false);
 	const [updateId, setUpdateId] = useState("");
@@ -27,12 +28,14 @@ const ProfileProvider = ({ children }) => {
 			hometown: hometown,
 			imgUrl: imgUrl,
 			hobbies: hobbies,
-            author: currentUser.displayName,
-            userId: currentUser.uid,
+            email: email,
+			author: currentUser.displayName,
+			userId: currentUser.uid,
 		});
 		setHometown("");
 		setImgUrl("");
 		setHobbies("");
+		setEmail("");
 	};
 
 	useEffect(() => {
@@ -54,16 +57,18 @@ const ProfileProvider = ({ children }) => {
 			setHometown("");
 			setImgUrl("");
 			setHobbies("");
+			setEmail("");
 			toast.success("New Profile Added");
 		} else {
 			updateProfile();
 		}
+        navigate('/about')
 	};
 
 	const deleteProfile = (id) => {
 		remove(ref(db, "Profile/" + id));
 		toast.error("Profile deleted");
-        navigate('/')
+		navigate("/");
 	};
 
 	const updateProfile = () => {
@@ -71,16 +76,20 @@ const ProfileProvider = ({ children }) => {
 			hometown: hometown,
 			imgUrl: imgUrl,
 			hobbies: hobbies,
-            author: currentUser.displayName,
-            userId: currentUser.uid,
+            email: email,
+			author: currentUser.displayName,
+			userId: currentUser.uid,
 		});
 		setHometown("");
 		setImgUrl("");
 		setHobbies("");
+		setEmail("");
 		setEdit(false);
 		setUpdateId("");
 		toast.success("Profile Updated");
 	};
+
+  
 
 	return (
 		<ProfileContext.Provider
@@ -91,6 +100,8 @@ const ProfileProvider = ({ children }) => {
 				setHometown,
 				setImgUrl,
 				setHobbies,
+                email,
+                setEmail,
 				writeToDatabase,
 				profiles,
 				deleteProfile,

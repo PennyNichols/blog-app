@@ -13,39 +13,44 @@ import UpdateBlog from "../pages/UpdateBlog";
 import PrivateRouter from "./PrivateRouter";
 
 const AppRouter = () => {
-    const {currentUser } = useContext(AuthContext);
+	const { currentUser } = useContext(AuthContext);
 	return (
-			<div className="page">
-				<Navigation />
-				<Routes>
-					{/* public routes */}
-					<Route path="/" element={<Dashboard />} />
-					<Route
-						path="/login"
-						element={<Login  />}
-					/>
-					<Route path="/register" element={<Register />} />
-					{/* private routes */}
-					<Route path="/about" element={<PrivateRouter currentUser={currentUser} />}>
-						<Route path="" element={<About />} />
-					</Route>
-					<Route path="/details/:id" element={<PrivateRouter currentUser={currentUser} />}>
-						<Route path="" element={<Details />} />
-					</Route>
-					<Route path="/new-blog" element={<PrivateRouter currentUser={currentUser} />}>
-						<Route path="" element={<NewBlog />} />
-					</Route>
-					<Route
-						path="/update-blog"
-						element={<PrivateRouter currentUser={currentUser} />}
-					>
-						<Route path="" element={<UpdateBlog />} />
-					</Route>
-					<Route path="/profile" element={<PrivateRouter currentUser={currentUser} />}>
-						<Route path="" element={<Profile />} />
-					</Route>
-				</Routes>
-			</div>
+		<div className="page">
+			<Navigation />
+			<Routes>
+				{/* public routes */}
+				<Route path="/" element={<Dashboard />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/register" element={<Register />} />
+				<Route path="/about" element={<About />} />
+				{/* private routes */}
+				<Route
+					path="/new-blog"
+					element={<PrivateRouter currentUser={currentUser} />}
+				>
+					<Route path="" element={<NewBlog />} />
+				</Route>
+			
+				<Route
+					path="/details/:id"
+					element={<PrivateRouter currentUser={currentUser} />}
+				>
+					<Route path="" element={<Details />} />
+				</Route>
+				<Route
+					path="/update-blog"
+					element={<PrivateRouter currentUser={currentUser} />}
+				>
+					<Route path="" element={<UpdateBlog />} />
+				</Route>
+				<Route
+					path="/profile"
+					element={<PrivateRouter currentUser={currentUser} />}
+				>
+					<Route path="" element={<Profile />} />
+				</Route>
+			</Routes>
+		</div>
 	);
 };
 
