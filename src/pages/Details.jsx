@@ -36,7 +36,7 @@ const Details = () => {
 
 	return (
 		<div className="m-5 p-4 rounded shadow-lg" style={{ backgroundColor: "#d3d3d3e2" }}>
-			<img className="mb-4" style={{height:'18rem'}} src={imgUrl || defaultImg} alt={title} />
+			<img className="mb-4 rounded shadow" style={{height:'18rem'}} src={imgUrl || defaultImg} alt={title} />
 			<h1 className="mb-4">{title}</h1>
 			<h2 className="mb-4">Written by: {author ? author : "Anonymous"}</h2>
 			<p>{body}</p>

@@ -21,8 +21,8 @@ const BlogCard = (props) => {
 			onClick={handleDetails}
 		>
 			<img
-				classNames="d-block m-auto"
-				style={{ width: "10rem" }}
+				classNames="shadow m-auto img-fluid"
+				style={{ height: "10rem", borderRadius:'5px' }}
 				src={imgUrl || defaultImg}
 				alt={title}
 			/>
