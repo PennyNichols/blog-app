@@ -10,6 +10,8 @@ const ProfileCard = (props) => {
 
     let { currentUser, navigate } = useContext(AuthContext);
     let { setHometown, setImgUrl, setHobbies, setEmail, setUpdateId, setEdit, deleteProfile } = useContext(ProfileContext);
+
+    const defaultImg = `https://robohash.org/${author}`
     
     const handleUpdate = () => {
 		setHometown(hometown);
@@ -30,7 +32,7 @@ const ProfileCard = (props) => {
 			<img
 				classNames=" my-3"
 				style={{ width: "10rem", alignSelf:'center' }}
-				src={imgUrl}
+				src={imgUrl || defaultImg}
 				alt={author}
 			/>
 			<Card.Body>

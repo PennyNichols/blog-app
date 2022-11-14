@@ -27,9 +27,9 @@ const BlogCard = (props) => {
 				alt={title}
 			/>
 			<Card.Body>
-				<Card.Title>{title}</Card.Title>
-				<Card.Subtitle>{author}</Card.Subtitle>
-				<Card.Text>{body.substring(0, 150)}...</Card.Text>
+				<Card.Title className='my-2'>{title}</Card.Title>
+				<Card.Subtitle className='my-2'>{author}</Card.Subtitle>
+				<Card.Text className='my-2'>{body.substring(0, 150)}...</Card.Text>
 			</Card.Body>
 		</div>
 	);
