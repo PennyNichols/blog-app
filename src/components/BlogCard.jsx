@@ -16,7 +16,7 @@ const BlogCard = (props) => {
 
 	return (
 		<div
-			className="rounded shadow-lg  p-2"
+			className="rounded shadow-lg  p-4"
 			style={{ width: "25rem", backgroundColor: "#d3d3d3e2", cursor:'pointer' }}
 			onClick={handleDetails}
 		>
@@ -27,7 +27,7 @@ const BlogCard = (props) => {
 				alt={title}
 			/>
 			<Card.Body>
-				<Card.Title className='my-2'>{title}</Card.Title>
+				<Card.Title className='my-3'>{title}</Card.Title>
 				<Card.Subtitle className='my-2'>{author}</Card.Subtitle>
 				<Card.Text className='my-2'>{body.substring(0, 150)}...</Card.Text>
 			</Card.Body>
