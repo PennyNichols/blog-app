@@ -18,6 +18,9 @@ const BlogProvider = ({ children }) => {
 	const [blogs, setBlogs] = useState([]);
 	const [edit, setEdit] = useState(false);
 	const [updateId, setUpdateId] = useState("");
+    
+    const current = new Date();
+    const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
    
 
 	const writeToDatabase = () => {
@@ -29,6 +32,7 @@ const BlogProvider = ({ children }) => {
 			body: body,
             author: currentUser.displayName,
             userId: currentUser.uid,
+            date: date,
 		});
 		setTitle("");
 		setImgUrl("");
@@ -74,6 +78,8 @@ const BlogProvider = ({ children }) => {
 			body: body,
             author: currentUser.displayName,
             userId: currentUser.uid,
+            date: date,
+
 		});
 		setTitle("");
 		setImgUrl("");

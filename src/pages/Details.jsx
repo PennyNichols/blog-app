@@ -39,7 +39,7 @@ const Details = () => {
 			<img className="mb-4 rounded shadow" style={{height:'18rem'}} src={imgUrl || defaultImg} alt={title} />
 			<h1 className="mb-4">{title}</h1>
 			<h2 className="mb-4">Written by: {author ? author : "Anonymous"}</h2>
-			<p>{body}</p>
+			<pre className='blog-details text-wrap'>{body}</pre>
 			{currentUser.uid === userId ? (
 				<>
 					<div className="d-flex gap-3 justify-content-center">
