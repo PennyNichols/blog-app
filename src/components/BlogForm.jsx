@@ -19,7 +19,7 @@ const BlogForm = () => {
 			<div className="p-5">
 				<Container
 					className="container-fluid p-4 rounded shadow-lg"
-					style={{ backgroundColor: "#d3d3d3e2", width: "24rem" }}
+					style={{ backgroundColor: "#d3d3d3e2", width: "40rem" }}
 				>
 					<h2 className="pb-3">New Post</h2>
 					<Form onSubmit={handleSubmit}>
