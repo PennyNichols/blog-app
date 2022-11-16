@@ -54,3 +54,15 @@
   border: 1px solid #ccc;
 }
 
+.details-wrapper{
+  width: 75vw;
+}
+
+@media(max-width: 800px){
+  .details-wrapper{
+    width: 100vw;
+    margin: 0;
+
+  }
+ 
+}
