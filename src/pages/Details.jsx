@@ -7,6 +7,7 @@ import { BlogContext } from "../contexts/BlogContext";
 import defaultImg from "../assets/login-bg.jpg";
 import htmlToDraft from "html-to-draftjs";
 import { ContentState, EditorState } from "draft-js";
+import { Container } from "react-bootstrap";
 
 const Details = () => {
 	const { state } = useLocation();
@@ -42,8 +43,9 @@ const Details = () => {
 	};
 
 	return (
-		<div
-			className="m-5 p-4 rounded shadow-lg"
+		<Container
+            fluid
+			className=" details-wrapper m-5 mx-auto p-4 rounded shadow-lg"
 			style={{ backgroundColor: "#d3d3d3e2" }}
 		>
 			<img
@@ -55,7 +57,7 @@ const Details = () => {
 			<h1 className="mb-4">{title}</h1>
 			<h2 className="mb-4">{headline}</h2>
 			<h3 className="mb-4">Written by: {author ? author : "Anonymous"}</h3>
-			<div
+			<div className='blog-body m-5'
 				dangerouslySetInnerHTML={{
 					__html: body,
 				}}
@@ -93,7 +95,7 @@ const Details = () => {
 					<h4 className="mt-3">meet the author</h4>
 				</Link>
 			)}
-		</div>
+		</Container>
 	);
 };
 
