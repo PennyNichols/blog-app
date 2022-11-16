@@ -1,6 +1,12 @@
 import React, { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { Editor } from "react-draft-wysiwyg";
 import { BlogContext } from "../contexts/BlogContext";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import "draft-js/dist/Draft.css";
+import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
+import { convertToRaw } from "draft-js";
 
 const BlogForm = () => {
 	const {
@@ -12,7 +18,13 @@ const BlogForm = () => {
 		setBody,
 		edit,
 		handleSubmit,
+		editorState,
+		setEditorState,
+		headline,
+		setHeadline,
 	} = useContext(BlogContext);
+
+	console.log(body);
 
 	return (
 		<div>
@@ -21,7 +33,7 @@ const BlogForm = () => {
 					className="container-fluid p-4 rounded shadow-lg"
 					style={{ backgroundColor: "#d3d3d3e2", width: "40rem" }}
 				>
-					<h2 className="pb-3">New Post</h2>
+					<h2 className="pb-3">Post</h2>
 					<Form onSubmit={handleSubmit}>
 						<Form.Control
 							type="text"
@@ -32,21 +44,50 @@ const BlogForm = () => {
 						<Form.Control
 							className="my-2"
 							type="text"
+							placeholder="Headline"
+							value={headline}
+							onChange={(e) => setHeadline(e.target.value)}
+						/>
+						<Form.Control
+							className="my-2"
+							type="text"
 							placeholder="Image URL"
 							value={imgUrl}
 							onChange={(e) => setImgUrl(e.target.value)}
 						/>
-						<Form.Control
+						{/* <Form.Control
 							placeholder="Write post details here"
 							as="textarea"
 							rows={5}
 							className="my-2"
 							value={body}
 							onChange={(e) => setBody(e.target.value)}
+						/> */}
+
+						<Editor
+							placeholder="Write your post here..."
+							defaultEditorState={editorState}
+							onEditorStateChange={(newState) => {
+								setEditorState(newState);
+								setBody(
+									draftToHtml(convertToRaw(newState.getCurrentContent()))
+								);
+							}}
+							editorClassName="editor-class rounded"
+							toolbarClassName="toolbar-class rounded"
 						/>
+
 						<Button className="my-2 w-100" type="submit">
-							{edit ? 'Update' : 'Submit'}
+							{edit ? "Update" : "Submit"}
 						</Button>
+						<div className="border">
+							<h4>Post Preview</h4>
+							<div
+								dangerouslySetInnerHTML={{
+									__html: body,
+								}}
+							/>
+						</div>
 					</Form>
 				</Container>
 			</div>

@@ -4,11 +4,11 @@ import { AuthContext } from "../contexts/AuthContext";
 import defaultImg from '../assets/login-bg.jpg'
 
 const BlogCard = (props) => {
-	const { imgUrl, title, body, author, id, userId, date } = props.blog;
+	const { imgUrl, title, body, author, id, userId, date, headline } = props.blog;
 
     let { navigate } = useContext(AuthContext);
     const handleDetails = () => {
-        navigate(`/details/${id}`, {state: {id, author, body, imgUrl, title, userId}})
+        navigate(`/details/${id}`, {state: {id, author, body, imgUrl, title, userId, headline}})
         
     }
 
@@ -29,7 +29,7 @@ const BlogCard = (props) => {
 			<div className='d-flex flex-column align-items-start ' style={{height:'18rem'}}>
 				<div className='my-2 mx-auto fs-4'>{title}</div>
 				<div className='my-2 mx-auto fs-5'>{author}</div>
-				<div className='my-1 mx-auto'>{body.substring(0, 150)}...</div>
+				<div className='my-1 mx-auto'>{headline}</div>
 				<div className='mt-auto d-flex flex-column'>Last Edited: {date}</div>
 			</div>
 		</div>
