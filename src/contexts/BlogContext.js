@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+import htmlToDraft from "html-to-draftjs";
+import { EditorState, ContentState } from "draft-js";
 
 export const BlogContext = createContext();
 
@@ -15,9 +17,11 @@ const BlogProvider = ({ children }) => {
 	const [title, setTitle] = useState("");
 	const [imgUrl, setImgUrl] = useState("");
 	const [body, setBody] = useState("");
+	const [headline, setHeadline] = useState("");
 	const [blogs, setBlogs] = useState([]);
 	const [edit, setEdit] = useState(false);
 	const [updateId, setUpdateId] = useState("");
+    const [editorState, setEditorState] = useState(EditorState.createEmpty())
     
     const current = new Date();
     const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
@@ -28,6 +32,7 @@ const BlogProvider = ({ children }) => {
 		const newBlogRef = push(blogRef);
 		set(newBlogRef, {
 			title: title,
+			headline: headline,
 			imgUrl: imgUrl,
 			body: body,
             author: currentUser.displayName,
@@ -35,8 +40,10 @@ const BlogProvider = ({ children }) => {
             date: date,
 		});
 		setTitle("");
+		setHeadline("");
 		setImgUrl("");
 		setBody("");
+        setEditorState(EditorState.createEmpty())
 	};
 
 	useEffect(() => {
@@ -48,7 +55,17 @@ const BlogProvider = ({ children }) => {
 				blogArr.push({ id, ...data[id] });
 			}
 			setBlogs(blogArr);
-		});
+
+
+
+
+
+            
+		
+        
+        
+        
+        });
 	}, []);
 
 	const handleSubmit = (e) => {
@@ -56,8 +73,10 @@ const BlogProvider = ({ children }) => {
 		if (!edit) {
 			writeToDatabase();
 			setTitle("");
+			setHeadline("");
 			setImgUrl("");
 			setBody("");
+            setEditorState(EditorState.createEmpty())
 			toast.success("New Blog Added");
 		} else {
 			updateBlog();
@@ -74,6 +93,7 @@ const BlogProvider = ({ children }) => {
 	const updateBlog = () => {
 		update(ref(db, "Blog/" + updateId), {
 			title: title,
+			headline: headline,
 			imgUrl: imgUrl,
 			body: body,
             author: currentUser.displayName,
@@ -82,10 +102,12 @@ const BlogProvider = ({ children }) => {
 
 		});
 		setTitle("");
+		setHeadline("");
 		setImgUrl("");
 		setBody("");
 		setEdit(false);
 		setUpdateId("");
+        setEditorState(EditorState.createEmpty())
 		toast.success("Blog Updated");
 	};
 
@@ -106,6 +128,10 @@ const BlogProvider = ({ children }) => {
 				setEdit,
 				setUpdateId,
 				handleSubmit,
+                editorState,
+                setEditorState,
+                headline,
+                setHeadline,
 			}}
 		>
 			{children}
