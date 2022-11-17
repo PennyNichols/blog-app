@@ -18,7 +18,7 @@ const Dashboard = () => {
 				></div>{" "}
 			</div>
 			<div className='d-flex flex-wrap p-3 gap-3 justify-content-center'>
-				{blogs.reverse().map(blog => {
+				{blogs.map(blog => {
 					return <BlogCard key={blog.id} blog={blog} />;
 				})}
 			</div>

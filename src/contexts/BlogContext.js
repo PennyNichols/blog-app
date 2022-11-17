@@ -54,7 +54,7 @@ const BlogProvider = ({ children }) => {
 			for (let id in data) {
 				blogArr.push({ id, ...data[id] });
 			}
-			setBlogs(blogArr);
+			setBlogs(blogArr.reverse());
 
 
 
