@@ -104,20 +104,20 @@ const BlogProvider = ({ children }) => {
 		toast.success("Blog Updated");
 	};
 
-    const handleLike = blog => {
-        if(!Object.values(blog.likes).includes(currentUser.uid)){
-            update(ref(db, 'Blog/' + blog.id), {
+    const handleLike = (blog, likes, like, id) => {
+        if(!Object.values(likes).includes(currentUser.uid)){
+            update(ref(db, 'Blog/' + id), {
                 ...blog,
-                like: +blog.like+1,
-                likes: [...blog.likes, currentUser.uid]
+                like: +like+1,
+                likes: [...likes, currentUser.uid]
 
             })
             console.log('liked')
         } else {
-            update(ref(db, 'Blog/' + blog.id), {
+            update(ref(db, 'Blog/' + id), {
                 ...blog,
-                like: +blog.like-1,
-                likes: blog.likes.filter(user => user !== currentUser.uid)
+                like: +like-1,
+                likes: likes.filter(user => user !== currentUser.uid)
             })
             console.log('unliked')
         }
@@ -153,3 +153,5 @@ const BlogProvider = ({ children }) => {
 };
 
 export default BlogProvider;
+
+

@@ -4,6 +4,7 @@ import { BlogContext } from "../contexts/BlogContext";
 
 const Dashboard = () => {
 	const { blogs } = useContext(BlogContext);
+    console.log(blogs)
 	return (
 		<div >
 			<div className="d-flex justify-content-center align-items-center">

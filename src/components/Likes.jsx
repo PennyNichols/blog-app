@@ -5,13 +5,13 @@ import { BlogContext } from "../contexts/BlogContext";
 import { db } from "../helpers/firebase";
 
 const Likes = ({ blog }) => {
-    const {likes} = blog
+    const {likes, like, id} = blog
 	const { currentUser } = useContext(AuthContext);
 
 	const { handleLike } = useContext(BlogContext);
 
 	return (
-		<div>
+		<div className='d-flex gap-2 justify-content-center align-items-center'>
 			<i
 				className={`fa fa-heart${
 					!likes?.includes(currentUser.uid) ? "-o" : ""
@@ -20,8 +20,9 @@ const Likes = ({ blog }) => {
 					cursor: "pointer",
 					color: likes?.includes(currentUser.uid) ? "red" : null,
 				}}
-				onClick={() => handleLike(blog)}
+				onClick={() => handleLike(blog, likes, like, id)}
 			/>
+            <p className='mb-1'>{like}</p>
 		</div>
 	);
 };

@@ -8,11 +8,13 @@ import defaultImg from "../assets/login-bg.jpg";
 import htmlToDraft from "html-to-draftjs";
 import { ContentState, EditorState } from "draft-js";
 import { Container } from "react-bootstrap";
+import Likes from "../components/Likes";
 
 const Details = () => {
 	const { state } = useLocation();
-	const { id, author, body, imgUrl, title, userId, headline } = state;
+	const { id, author, body, imgUrl, title, userId, headline, likes, like, date } = state;
 	const { currentUser, navigate } = useContext(AuthContext);
+	console.log(likes)
 	const {
 		setTitle,
 		setImgUrl,
@@ -45,7 +47,7 @@ const Details = () => {
 	return (
 		<Container
             fluid
-			className=" details-wrapper m-5 mx-auto p-4 rounded shadow-lg"
+			className=" details-wrapper m-5 mx-auto p-4 pb-1 rounded shadow-lg"
 			style={{ backgroundColor: "#d3d3d3e2" }}
 		>
 			<img
@@ -95,6 +97,10 @@ const Details = () => {
 					<h4 className="mt-3">meet the author</h4>
 				</Link>
 			)}
+            <div className="d-flex justify-content-between">
+				<div className="my-1">Last Edited: {date}</div>
+				{currentUser && <Likes id={id} blog={state} likes={likes} like={like} />}
+			</div>
 		</Container>
 	);
 };
