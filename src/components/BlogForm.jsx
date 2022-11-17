@@ -55,14 +55,6 @@ const BlogForm = () => {
 							value={imgUrl}
 							onChange={(e) => setImgUrl(e.target.value)}
 						/>
-						{/* <Form.Control
-							placeholder="Write post details here"
-							as="textarea"
-							rows={5}
-							className="my-2"
-							value={body}
-							onChange={(e) => setBody(e.target.value)}
-						/> */}
 
 						<Editor
 							placeholder="Write your post here..."
