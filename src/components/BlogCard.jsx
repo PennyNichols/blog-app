@@ -5,12 +5,12 @@ import defaultImg from "../assets/login-bg.jpg";
 import Likes from "./Likes";
 
 const BlogCard = (props) => {
-    const { imgUrl, title, body, author, id, userId, date, headline, likes, like } =
+    const { imgUrl, title, body, author, id, userId, date, headline, likes, like, comment, comments } =
     props.blog;
 	let { navigate, currentUser } = useContext(AuthContext);
 	const handleDetails = () => {
         navigate(`/details/${id}`, {
-            state: { id, author, body, imgUrl, title, userId, headline, likes, like, date },
+            state: { id, author, body, imgUrl, title, userId, headline, likes, like, date, comment, comments },
 		});
 	};
     
@@ -45,7 +45,7 @@ const BlogCard = (props) => {
 			</div>
 			<div className="d-flex justify-content-between">
 				<div className="my-1">Last Edited: {date}</div>
-				{currentUser && <Likes id={id} blog={props.blog} likes={likes} like={like} />}
+				{currentUser && <Likes id={id} blog={props.blog} likes={likes} like={like} handleDetails={handleDetails} />}
 			</div>
 		</div>
 	);

@@ -7,6 +7,7 @@ import { AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 import htmlToDraft from "html-to-draftjs";
 import { EditorState, ContentState } from "draft-js";
+import {v4 as uuidv4} from 'uuid';
 
 export const BlogContext = createContext();
 
@@ -22,6 +23,9 @@ const BlogProvider = ({ children }) => {
 	const [edit, setEdit] = useState(false);
 	const [updateId, setUpdateId] = useState("");
     const [editorState, setEditorState] = useState(EditorState.createEmpty())
+	const [commentText, setCommentText] = useState("");
+	const [commentDetails, setCommentDetails] = useState({});
+	const [commentsArr, setCommentsArr] = useState([]);
     
     const current = new Date();
     const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
@@ -39,6 +43,8 @@ const BlogProvider = ({ children }) => {
             userId: currentUser.uid,
             like: '0',
             likes: [''],
+			comment: '0',
+			commentsArr: [''],
             date: date,
 		});
 		setTitle("");
@@ -104,6 +110,10 @@ const BlogProvider = ({ children }) => {
 		toast.success("Blog Updated");
 	};
 
+
+
+
+
     const handleLike = (blog, likes, like, id) => {
         if(!Object.values(likes).includes(currentUser.uid)){
             update(ref(db, 'Blog/' + id), {
@@ -122,6 +132,19 @@ const BlogProvider = ({ children }) => {
             console.log('unliked')
         }
     }
+
+	const handleComment =(e) => {
+		e.preventDefault()
+		setCommentDetails([{
+			commentId: uuidv4(),
+			commentText: commentText,
+			author: currentUser.displayName,
+            userId: currentUser.uid,
+            date: date,
+		}])
+		setCommentsArr(commentsArr + commentDetails)
+		console.log(commentDetails)
+	}
 
 	return (
 		<BlogContext.Provider
@@ -144,7 +167,10 @@ const BlogProvider = ({ children }) => {
                 setEditorState,
                 headline,
                 setHeadline,
-                handleLike
+                handleLike,
+				commentText,
+				setCommentText,
+				handleComment
 			}}
 		>
 			{children}
