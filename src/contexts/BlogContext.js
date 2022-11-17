@@ -37,6 +37,8 @@ const BlogProvider = ({ children }) => {
 			body: body,
             author: currentUser.displayName,
             userId: currentUser.uid,
+            like: '0',
+            likes: [''],
             date: date,
 		});
 		setTitle("");
@@ -55,16 +57,7 @@ const BlogProvider = ({ children }) => {
 				blogArr.push({ id, ...data[id] });
 			}
 			setBlogs(blogArr.reverse());
-
-
-
-
-
-            
-		
-        
-        
-        
+                
         });
 	}, []);
 
@@ -111,6 +104,25 @@ const BlogProvider = ({ children }) => {
 		toast.success("Blog Updated");
 	};
 
+    const handleLike = blog => {
+        if(!Object.values(blog.likes).includes(currentUser.uid)){
+            update(ref(db, 'Blog/' + blog.id), {
+                ...blog,
+                like: +blog.like+1,
+                likes: [...blog.likes, currentUser.uid]
+
+            })
+            console.log('liked')
+        } else {
+            update(ref(db, 'Blog/' + blog.id), {
+                ...blog,
+                like: +blog.like-1,
+                likes: blog.likes.filter(user => user !== currentUser.uid)
+            })
+            console.log('unliked')
+        }
+    }
+
 	return (
 		<BlogContext.Provider
 			value={{
@@ -132,6 +144,7 @@ const BlogProvider = ({ children }) => {
                 setEditorState,
                 headline,
                 setHeadline,
+                handleLike
 			}}
 		>
 			{children}
