@@ -9,6 +9,9 @@ import htmlToDraft from "html-to-draftjs";
 import { ContentState, EditorState } from "draft-js";
 import { Button, Container, Form } from "react-bootstrap";
 import Likes from "../components/Likes";
+import CommentForm from "../components/CommentForm";
+import CommentCard from "../components/CommentCard";
+import { CommentContext } from "../contexts/CommentContext";
 
 const Details = () => {
 	const { state } = useLocation();
@@ -23,7 +26,6 @@ const Details = () => {
 		likes,
 		like,
 		date,
-		commentsArr,
 	} = state;
 	const { currentUser, navigate } = useContext(AuthContext);
 	const {
@@ -35,12 +37,13 @@ const Details = () => {
 		setUpdateId,
 		setHeadline,
 		setEditorState,
-		commentText,
-		setCommentText,
-		handleComment,
 	} = useContext(BlogContext);
 	// const { blogs } = useContext(BlogContext);
 	// const {id} = useParams()
+
+	const { comments } = useContext(CommentContext);
+
+
 
 	const handleUpdate = () => {
 		setTitle(title);
@@ -84,7 +87,6 @@ const Details = () => {
 					}}
 				/>
 				{currentUser.uid === userId ? (
-					<>
 						<div className="d-flex gap-3 justify-content-center">
 							<button
 								style={{ backgroundColor: "transparent", border: "none" }}
@@ -101,13 +103,6 @@ const Details = () => {
 								<RiDeleteBinFill style={{ fontSize: "3rem", color: "red" }} />
 							</button>
 						</div>
-						<Link
-							style={{ textDecoration: "none", textTransform: "uppercase" }}
-							to="/about"
-						>
-							<h4 className="mt-3">About our authors</h4>
-						</Link>
-					</>
 				) : (
 					<Link
 						style={{ textDecoration: "none", textTransform: "uppercase" }}
@@ -129,18 +124,10 @@ const Details = () => {
 				style={{ backgroundColor: "#d3d3d3e2" }}
 			>
 				<h2>Comments</h2>
-				<Form className="d-flex gap-3 my-4" onSubmit={handleComment}>
-					<Form.Control
-						as='textarea'
-						style={{minWidth: '100px'}}
-						placeholder="Leave a comment..."
-						value={commentText}
-						onChange={(e) => {
-							setCommentText(e.target.value);
-						}}
-					/>
-					<Button type='submit'>Submit</Button>
-				</Form>
+				<CommentForm id={id} blog={state} />
+				{comments?.filter(comment => comment.blogId === id).map(filteredComment => {
+					return <CommentCard key={filteredComment.id} comment={filteredComment} />;
+				})}
 			</Container>
 		</>
 	);

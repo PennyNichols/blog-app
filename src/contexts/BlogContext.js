@@ -12,8 +12,7 @@ import {v4 as uuidv4} from 'uuid';
 export const BlogContext = createContext();
 
 const BlogProvider = ({ children }) => {
-	const { currentUser } = useContext(AuthContext);
-    const navigate = useNavigate()
+	const { currentUser, navigate } = useContext(AuthContext);
 
 	const [title, setTitle] = useState("");
 	const [imgUrl, setImgUrl] = useState("");
@@ -23,9 +22,6 @@ const BlogProvider = ({ children }) => {
 	const [edit, setEdit] = useState(false);
 	const [updateId, setUpdateId] = useState("");
     const [editorState, setEditorState] = useState(EditorState.createEmpty())
-	const [commentText, setCommentText] = useState("");
-	const [commentDetails, setCommentDetails] = useState({});
-	const [commentsArr, setCommentsArr] = useState([]);
     
     const current = new Date();
     const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
@@ -43,8 +39,6 @@ const BlogProvider = ({ children }) => {
             userId: currentUser.uid,
             like: '0',
             likes: [''],
-			comment: '0',
-			commentsArr: [''],
             date: date,
 		});
 		setTitle("");
@@ -52,7 +46,11 @@ const BlogProvider = ({ children }) => {
 		setImgUrl("");
 		setBody("");
         setEditorState(EditorState.createEmpty())
+		
+		
 	};
+
+	
 
 	useEffect(() => {
 		const blogRef = ref(db, "Blog");
@@ -112,8 +110,6 @@ const BlogProvider = ({ children }) => {
 
 
 
-
-
     const handleLike = (blog, likes, like, id) => {
         if(!Object.values(likes).includes(currentUser.uid)){
             update(ref(db, 'Blog/' + id), {
@@ -133,18 +129,7 @@ const BlogProvider = ({ children }) => {
         }
     }
 
-	const handleComment =(e) => {
-		e.preventDefault()
-		setCommentDetails([{
-			commentId: uuidv4(),
-			commentText: commentText,
-			author: currentUser.displayName,
-            userId: currentUser.uid,
-            date: date,
-		}])
-		setCommentsArr(commentsArr + commentDetails)
-		console.log(commentDetails)
-	}
+	
 
 	return (
 		<BlogContext.Provider
@@ -168,9 +153,6 @@ const BlogProvider = ({ children }) => {
                 headline,
                 setHeadline,
                 handleLike,
-				commentText,
-				setCommentText,
-				handleComment
 			}}
 		>
 			{children}

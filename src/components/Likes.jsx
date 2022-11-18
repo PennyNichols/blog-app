@@ -2,15 +2,19 @@ import { push, ref, remove, update } from "firebase/database";
 import React, { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { BlogContext } from "../contexts/BlogContext";
+import { CommentContext } from "../contexts/CommentContext";
 import { db } from "../helpers/firebase";
 
 const Likes = ({ blog }) => {
-    const {likes, like, id, comment, comments} = blog
+    const {likes, like, id} = blog
 	const { currentUser, navigate } = useContext(AuthContext);
 
 	const { handleLike } = useContext(BlogContext);
+	
+	const { comments } = useContext(CommentContext);
 
-
+	const commentArr = comments.filter(comment => comment.blogId === id)
+	const commentCount = commentArr.length
 	
 
 	return (
@@ -28,13 +32,13 @@ const Likes = ({ blog }) => {
             <p className='mb-1'>{like}</p>
 			<i
 				className={`fa fa-comment${
-					!comments?.includes(currentUser.uid) ? "-o" : ""
+					(commentCount===0) ? "-o" : ""
 				} fa-lg`}
 				style={{
-					color: comments?.includes(currentUser.uid) ? "black" : null,
+					color: (commentCount>=1) ? "black" : null,
 				}}
 			/>
-            <p className='mb-1'>{comment}</p>
+            <p className='mb-1'>{commentCount}</p>
 			
 		</div>
 	);

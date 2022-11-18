@@ -63,13 +63,45 @@
   font-size: 2rem;
 }
 
-
+.comment{
+  text-align: left;
+}
 
 @media(max-width: 800px){
   .details-wrapper{
     width: 100vw;
     margin: 0;
 
+  }
+
+
+ 
+}
+
+
+@media(max-width: 1000px){
+  
+
+  .comment-img-wrapper{
+    flex-direction: column;
+  }
+ 
+}
+
+@media(max-width: 700px){
+  
+
+  .comment-wrapper{
+    flex-direction: column;
+  }
+ 
+}
+
+@media(max-width: 1250px){
+  
+
+  .comment{
+    text-align: center;
   }
  
 }
