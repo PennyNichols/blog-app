@@ -37,6 +37,7 @@ const BlogProvider = ({ children }) => {
 			body: body,
             author: currentUser.displayName,
             userId: currentUser.uid,
+			commentCount: '0',
             like: '0',
             likes: [''],
             date: date,

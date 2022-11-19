@@ -28,7 +28,6 @@ const Details = () => {
 		likes,
 		like,
 		date,
-		
 	} = state;
 	const { currentUser, navigate } = useContext(AuthContext);
 	const { comments } = useContext(CommentContext);
@@ -45,11 +44,6 @@ const Details = () => {
 	// const { blogs } = useContext(BlogContext);
 	// const {id} = useParams()
 
-
-	const commentArr = comments.filter(comment => comment.blogId === id)
-	const commentCount = commentArr.length
-
-
 	const handleUpdate = () => {
 		setTitle(title);
 		setHeadline(headline);
@@ -64,24 +58,6 @@ const Details = () => {
 		setEditorState(_editorState);
 		setEdit(true);
 		navigate("/new-blog");
-	};
-
-	const handleLike = (state) => {
-		if (!Object.values(likes).includes(currentUser.uid)) {
-			update(ref(db, "Blog/" + id), {
-				...state,
-				like: +like + 1,
-				likes: [...likes, currentUser.uid],
-			});
-			console.log("liked");
-		} else {
-			update(ref(db, "Blog/" + id), {
-				...state,
-				like: +like - 1,
-				likes: likes.filter((user) => user !== currentUser.uid),
-			});
-			console.log("unliked");
-		}
 	};
 
 	return (
@@ -134,32 +110,7 @@ const Details = () => {
 				<div className="d-flex justify-content-between">
 					<div className="my-1">Last Edited: {date}</div>
 					{currentUser && (
-						<>
-							<div className="my-1">Last Edited: {date}</div>
-
-							<div className="d-flex gap-2 justify-content-center align-items-center">
-								<i
-									className={`fa fa-heart${
-										!likes?.includes(currentUser.uid) ? "-o" : ""
-									} fa-lg`}
-									style={{
-										cursor: "pointer",
-										color: likes?.includes(currentUser.uid) ? "red" : null,
-									}}
-									onClick={() => handleLike(state)}
-								/>
-								<p className="mb-1">{like}</p>
-								<i
-									className={`fa fa-comment${
-										commentCount === 0 ? "-o" : ""
-									} fa-lg`}
-									style={{
-										color: commentCount >= 1 ? "black" : null,
-									}}
-								/>
-								<p className="mb-1">{commentCount}</p>
-							</div>
-						</>
+						<Likes id={id} blog={state} likes={likes} like={like} />
 					)}
 				</div>
 			</Container>
