@@ -13,21 +13,21 @@ const ProfileForm = () => {
 		setHobbies,
 		email,
 		setEmail,
-        profiles,
+		profiles,
 		handleSubmit,
 		edit,
-        setIsFound,
+		setIsFound,
 	} = useContext(ProfileContext);
-	const {currentUser	} = useContext(AuthContext);
+	const { currentUser } = useContext(AuthContext);
 
-    const found = profiles.some(profile =>{
-        if(profile.userId === currentUser.uid){
-            return true;
-        }
-        return false;
-    });
+	const found = profiles.some((profile) => {
+		if (profile.userId === currentUser.uid) {
+			return true;
+		}
+		return false;
+	});
 
-    setIsFound(found)
+	setIsFound(found);
 
 	return (
 		<Container

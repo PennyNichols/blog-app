@@ -37,8 +37,8 @@ const ProfileCard = (props) => {
 			/>
 			<Card.Body>
 				<Card.Title className='my-2'>{author}</Card.Title>
-				<Card.Subtitle className='my-2'>{hometown}</Card.Subtitle>
-				<Card.Text className='my-2'>{hobbies}</Card.Text>
+				<Card.Subtitle className='my-2'>Hometown: {hometown}</Card.Subtitle>
+				<Card.Text className='my-2'><b>Hobbies:</b> {hobbies}</Card.Text>
 			</Card.Body>
             {currentUser.uid === userId ? (
 				<>

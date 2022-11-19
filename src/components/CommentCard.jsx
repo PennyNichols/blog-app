@@ -16,7 +16,7 @@ const CommentCard = (props) => {
 	// style={{
 	//     color: comments?.includes(comments.blogId===id) ? "black" : null,
 	// }}
-
+	const defaultImg = `https://robohash.org/${author}`;
 	const handleUpdateComment = () => {
 		setCommentText(comment);
 		setUpdateId(id);
@@ -30,8 +30,12 @@ const CommentCard = (props) => {
 
 	return (
 		<div className="comment-wrapper d-flex justify-content-between align-items-center border p-3 my-4">
-			<div className='comment-img-wrapper d-flex align-items-center'>
-				<img style={{height: '8rem'}} src={imgUrl} alt={author} />
+			<div className="comment-img-wrapper d-flex align-items-center">
+				<img
+					style={{ height: "8rem" }}
+					src={imgUrl || defaultImg}
+					alt={author}
+				/>
 				<div>
 					<h4
 						style={{ color: currentUser.uid === userId ? "#0d6efd" : "black" }}
@@ -42,24 +46,28 @@ const CommentCard = (props) => {
 				</div>
 			</div>
 			<div>
-				<p className='comment m-4'>{comment}</p>
+				<p className="comment m-4">{comment}</p>
 			</div>
-			<div className="d-flex gap-3 justify-content-center">
-				<button
-					style={{ backgroundColor: "transparent", border: "none" }}
-					type="button"
-					onClick={handleUpdateComment}
-				>
-					<FaEdit style={{ fontSize: "2rem", color: "green" }} />
-				</button>
-				<button
-					style={{ backgroundColor: "transparent", border: "none" }}
-					type="button"
-					onClick={() => deleteComment(id)}
-				>
-					<RiDeleteBinFill style={{ fontSize: "2rem", color: "red" }} />
-				</button>
-			</div>
+			{currentUser.uid === userId ? (
+				<div className="d-flex gap-3 justify-content-center">
+					<button
+						style={{ backgroundColor: "transparent", border: "none" }}
+						type="button"
+						onClick={handleUpdateComment}
+					>
+						<FaEdit style={{ fontSize: "3rem", color: "green" }} />
+					</button>
+					<button
+						style={{ backgroundColor: "transparent", border: "none" }}
+						type="button"
+						onClick={() => deleteComment(id)}
+					>
+						<RiDeleteBinFill style={{ fontSize: "3rem", color: "red" }} />
+					</button>
+				</div>
+			) : (
+				<div></div>
+			)}
 		</div>
 	);
 };

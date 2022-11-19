@@ -38,7 +38,7 @@ const BlogCard = (props) => {
 					style={{ height: "14em" }}
 				>
 					<h3 className="my-2 mt-4 mx-auto fs-4">{title}</h3>
-					<h4 className="my-2 mx-auto fs-5">{author}</h4>
+					<h4 style={{ color: currentUser.uid === userId ? "#0d6efd" : "black" }} className="my-2 mx-auto fs-5">{author}</h4>
 					<div className="my-3 mx-auto">{headline}</div>
 				</div>
 			</div>
