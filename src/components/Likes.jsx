@@ -1,9 +1,7 @@
-import { push, ref, remove, update } from "firebase/database";
 import React, { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { BlogContext } from "../contexts/BlogContext";
 import { CommentContext } from "../contexts/CommentContext";
-import { db } from "../helpers/firebase";
 
 const Likes = ({ blog }) => {
     const {likes, like, id} = blog
@@ -27,7 +25,7 @@ const Likes = ({ blog }) => {
 					cursor: "pointer",
 					color: likes?.includes(currentUser.uid) ? "red" : null,
 				}}
-				onClick={() => handleLike(blog, likes, like, id)}
+				onClick={() => handleLike(blog)}
 			/>
             <p className='mb-1'>{like}</p>
 			<i

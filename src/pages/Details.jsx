@@ -12,6 +12,8 @@ import Likes from "../components/Likes";
 import CommentForm from "../components/CommentForm";
 import CommentCard from "../components/CommentCard";
 import { CommentContext } from "../contexts/CommentContext";
+import { ref, update } from "firebase/database";
+import { db } from "../helpers/firebase";
 
 const Details = () => {
 	const { state } = useLocation();
@@ -26,8 +28,10 @@ const Details = () => {
 		likes,
 		like,
 		date,
+		
 	} = state;
 	const { currentUser, navigate } = useContext(AuthContext);
+	const { comments } = useContext(CommentContext);
 	const {
 		setTitle,
 		setImgUrl,
@@ -41,8 +45,9 @@ const Details = () => {
 	// const { blogs } = useContext(BlogContext);
 	// const {id} = useParams()
 
-	const { comments } = useContext(CommentContext);
 
+	const commentArr = comments.filter(comment => comment.blogId === id)
+	const commentCount = commentArr.length
 
 
 	const handleUpdate = () => {
@@ -61,8 +66,23 @@ const Details = () => {
 		navigate("/new-blog");
 	};
 
-	
-
+	const handleLike = (state) => {
+		if (!Object.values(likes).includes(currentUser.uid)) {
+			update(ref(db, "Blog/" + id), {
+				...state,
+				like: +like + 1,
+				likes: [...likes, currentUser.uid],
+			});
+			console.log("liked");
+		} else {
+			update(ref(db, "Blog/" + id), {
+				...state,
+				like: +like - 1,
+				likes: likes.filter((user) => user !== currentUser.uid),
+			});
+			console.log("unliked");
+		}
+	};
 
 	return (
 		<>
@@ -87,22 +107,22 @@ const Details = () => {
 					}}
 				/>
 				{currentUser.uid === userId ? (
-						<div className="d-flex gap-3 justify-content-center">
-							<button
-								style={{ backgroundColor: "transparent", border: "none" }}
-								type="button"
-								onClick={handleUpdate}
-							>
-								<FaEdit style={{ fontSize: "3rem", color: "green" }} />
-							</button>
-							<button
-								style={{ backgroundColor: "transparent", border: "none" }}
-								type="button"
-								onClick={() => deleteBlog(id)}
-							>
-								<RiDeleteBinFill style={{ fontSize: "3rem", color: "red" }} />
-							</button>
-						</div>
+					<div className="d-flex gap-3 justify-content-center">
+						<button
+							style={{ backgroundColor: "transparent", border: "none" }}
+							type="button"
+							onClick={handleUpdate}
+						>
+							<FaEdit style={{ fontSize: "3rem", color: "green" }} />
+						</button>
+						<button
+							style={{ backgroundColor: "transparent", border: "none" }}
+							type="button"
+							onClick={() => deleteBlog(id)}
+						>
+							<RiDeleteBinFill style={{ fontSize: "3rem", color: "red" }} />
+						</button>
+					</div>
 				) : (
 					<Link
 						style={{ textDecoration: "none", textTransform: "uppercase" }}
@@ -114,7 +134,32 @@ const Details = () => {
 				<div className="d-flex justify-content-between">
 					<div className="my-1">Last Edited: {date}</div>
 					{currentUser && (
-						<Likes id={id} blog={state} likes={likes} like={like} />
+						<>
+							<div className="my-1">Last Edited: {date}</div>
+
+							<div className="d-flex gap-2 justify-content-center align-items-center">
+								<i
+									className={`fa fa-heart${
+										!likes?.includes(currentUser.uid) ? "-o" : ""
+									} fa-lg`}
+									style={{
+										cursor: "pointer",
+										color: likes?.includes(currentUser.uid) ? "red" : null,
+									}}
+									onClick={() => handleLike(state)}
+								/>
+								<p className="mb-1">{like}</p>
+								<i
+									className={`fa fa-comment${
+										commentCount === 0 ? "-o" : ""
+									} fa-lg`}
+									style={{
+										color: commentCount >= 1 ? "black" : null,
+									}}
+								/>
+								<p className="mb-1">{commentCount}</p>
+							</div>
+						</>
 					)}
 				</div>
 			</Container>
@@ -125,9 +170,13 @@ const Details = () => {
 			>
 				<h2>Comments</h2>
 				<CommentForm id={id} blog={state} />
-				{comments?.filter(comment => comment.blogId === id).map(filteredComment => {
-					return <CommentCard key={filteredComment.id} comment={filteredComment} />;
-				})}
+				{comments
+					?.filter((comment) => comment.blogId === id)
+					.map((filteredComment) => {
+						return (
+							<CommentCard key={filteredComment.id} comment={filteredComment} />
+						);
+					})}
 			</Container>
 		</>
 	);

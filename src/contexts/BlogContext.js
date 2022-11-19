@@ -110,20 +110,20 @@ const BlogProvider = ({ children }) => {
 
 
 
-    const handleLike = (blog, likes, like, id) => {
-        if(!Object.values(likes).includes(currentUser.uid)){
-            update(ref(db, 'Blog/' + id), {
+    const handleLike = (blog) => {
+        if(!Object.values(blog.likes).includes(currentUser.uid)){
+            update(ref(db, 'Blog/' + blog.id), {
                 ...blog,
-                like: +like+1,
-                likes: [...likes, currentUser.uid]
+                like: +blog.like+1,
+                likes: [...blog.likes, currentUser.uid]
 
             })
             console.log('liked')
         } else {
-            update(ref(db, 'Blog/' + id), {
+            update(ref(db, 'Blog/' + blog.id), {
                 ...blog,
-                like: +like-1,
-                likes: likes.filter(user => user !== currentUser.uid)
+                like: +blog.like-1,
+                likes: blog.likes.filter(user => user !== currentUser.uid)
             })
             console.log('unliked')
         }
