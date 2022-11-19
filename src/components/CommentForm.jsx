@@ -1,11 +1,8 @@
 import React, { useContext } from 'react'
 import { Button, Form } from 'react-bootstrap';
-import { AuthContext } from '../contexts/AuthContext';
-import { BlogContext } from '../contexts/BlogContext';
 import { CommentContext } from '../contexts/CommentContext';
 
 const CommentForm = ({blog}) => {
-  const { currentUser, navigate } = useContext(AuthContext);
 	const {
 		commentText, setCommentText, handleComment, setBlogId, edit
 	} = useContext(CommentContext);

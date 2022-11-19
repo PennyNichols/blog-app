@@ -11,7 +11,6 @@ import {
 	signInWithPopup,
 	sendPasswordResetEmail,
 } from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
 
 // .env variable assignment setup:
 // REACT_APP_apiKey=
@@ -35,7 +34,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const analytics = getAnalytics(app);
 export const db = getDatabase(app);
 
 // Register a user

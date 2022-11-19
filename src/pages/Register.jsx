@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Register = () => {
-    const { name, setName, email, setEmail, password, setPassword, error, setError, handleSignUp, handleProvider, navigate } = useContext(AuthContext);
+    const { name, setName, email, setEmail, password, setPassword, error, handleSignUp, handleProvider, navigate } = useContext(AuthContext);
 	
 
 

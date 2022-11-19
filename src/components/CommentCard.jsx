@@ -8,9 +8,9 @@ import { ProfileContext } from "../contexts/ProfileContext";
 const CommentCard = (props) => {
 	const { author, comment, date, userId, id } = props.comment;
 
-	let { currentUser, navigate } = useContext(AuthContext);
+	let { currentUser } = useContext(AuthContext);
 	let { profiles } = useContext(ProfileContext);
-	let { deleteComment, setCommentText, setEdit, setUpdateId, updateId } =
+	let { deleteComment, setCommentText, setEdit, setUpdateId } =
 		useContext(CommentContext);
 
 	// style={{

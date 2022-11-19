@@ -17,7 +17,6 @@ const ProfileProvider = ({ children }) => {
 	const [hobbies, setHobbies] = useState("");
 	const [email, setEmail] = useState("");
 	const [profiles, setProfiles] = useState([]);
-	const [authorBlogs, setAuthorBlogs] = useState([]);
 	const [edit, setEdit] = useState(false);
 	const [updateId, setUpdateId] = useState("");
 	const [isFound, setIsFound] = useState(false);

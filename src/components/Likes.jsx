@@ -5,7 +5,7 @@ import { CommentContext } from "../contexts/CommentContext";
 
 const Likes = ({ blog }) => {
     const {likes, like, id} = blog
-	const { currentUser, navigate } = useContext(AuthContext);
+	const { currentUser } = useContext(AuthContext);
 
 	const { handleLike } = useContext(BlogContext);
 	

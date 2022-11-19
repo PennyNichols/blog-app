@@ -7,13 +7,11 @@ import { BlogContext } from "../contexts/BlogContext";
 import defaultImg from "../assets/login-bg.jpg";
 import htmlToDraft from "html-to-draftjs";
 import { ContentState, EditorState } from "draft-js";
-import { Button, Container, Form } from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import Likes from "../components/Likes";
 import CommentForm from "../components/CommentForm";
 import CommentCard from "../components/CommentCard";
 import { CommentContext } from "../contexts/CommentContext";
-import { ref, update } from "firebase/database";
-import { db } from "../helpers/firebase";
 
 const Details = () => {
 	const { state } = useLocation();

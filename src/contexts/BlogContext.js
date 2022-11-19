@@ -4,10 +4,7 @@ import { ref, set, push, onValue, remove, update } from "firebase/database";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "./AuthContext";
-import { useNavigate } from "react-router-dom";
-import htmlToDraft from "html-to-draftjs";
-import { EditorState, ContentState } from "draft-js";
-import {v4 as uuidv4} from 'uuid';
+import { EditorState } from "draft-js";
 
 export const BlogContext = createContext();
 

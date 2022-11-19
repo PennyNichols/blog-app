@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { Card } from "react-bootstrap";
+import React, { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import defaultImg from "../assets/login-bg.jpg";
 import Likes from "./Likes";

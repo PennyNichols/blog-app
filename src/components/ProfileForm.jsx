@@ -16,11 +16,9 @@ const ProfileForm = () => {
         profiles,
 		handleSubmit,
 		edit,
-        isFound,
         setIsFound,
-        handleReject
 	} = useContext(ProfileContext);
-	const {currentUser, navigate	} = useContext(AuthContext);
+	const {currentUser	} = useContext(AuthContext);
 
     const found = profiles.some(profile =>{
         if(profile.userId === currentUser.uid){

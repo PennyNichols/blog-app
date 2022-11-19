@@ -5,7 +5,6 @@ import { BlogContext } from "../contexts/BlogContext";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "draft-js/dist/Draft.css";
 import draftToHtml from "draftjs-to-html";
-import htmlToDraft from "html-to-draftjs";
 import { convertToRaw } from "draft-js";
 
 const BlogForm = () => {
