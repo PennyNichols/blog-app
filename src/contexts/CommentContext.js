@@ -8,7 +8,7 @@ import { AuthContext } from "./AuthContext";
 export const CommentContext = createContext();
 
 const CommentProvider = ({ children }) => {
-	const { currentUser, navigate } = useContext(AuthContext);
+	const { currentUser } = useContext(AuthContext);
 
     const [commentText, setCommentText] = useState('')
     const [blogId, setBlogId] = useState('')
