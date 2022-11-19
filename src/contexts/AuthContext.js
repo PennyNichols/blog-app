@@ -1,9 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {logout, userObserver} from '../helpers/firebase';
-import { registerUser,login, signUpProvider, forgetPassword } from "../helpers/firebase";
-import {toast} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { logout, userObserver } from "../helpers/firebase";
+import {
+	registerUser,
+	login,
+	signUpProvider,
+	forgetPassword,
+} from "../helpers/firebase";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const AuthContext = createContext();
 
@@ -13,18 +18,14 @@ const AuthProvider = (props) => {
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 	const [error, setError] = useState(null);
-    const [userId, setUserId] = useState();
+	const [userId, setUserId] = useState();
 
 	const navigate = useNavigate();
 
-
-
 	useEffect(() => userObserver(setCurrentUser), []);
 	useEffect(() => userObserver(setUserId), []);
-
-
-
-    const handleSignUp = async () => {
+	
+	const handleSignUp = async () => {
 		if (!name || !email || !password) {
 			setError("Invalid Entry");
 			return;
@@ -34,18 +35,18 @@ const AuthProvider = (props) => {
 			setError(message);
 		} else {
 			setError(null);
-            setName();
-            setEmail();
-            setPassword();
+			setName();
+			setEmail();
+			setPassword();
 			navigate("/");
 		}
 	};
 
-    const handleProvider = () =>{
-        signUpProvider();
-        navigate('/');
-    }
-    const handleLogin = async (e) => {
+	const handleProvider = () => {
+		signUpProvider();
+		navigate("/");
+	};
+	const handleLogin = async (e) => {
 		if (!email || !password) {
 			setError("Invalid Entry");
 			return;
@@ -55,29 +56,46 @@ const AuthProvider = (props) => {
 			setError(message);
 		} else {
 			setError(null);
-            setName();
-            setEmail();
-            setPassword();
+			setName();
+			setEmail();
+			setPassword();
 			navigate("/");
-            toast.success('Welcome Back!')
+			toast.success("Welcome Back!");
 		}
 	};
 
+	const forgetPasswordHandler = async (email) => {
+		const message = await forgetPassword(email);
+		if (message) setError(message);
+	};
 
-
-    const forgetPasswordHandler = async(email) => {
-        const message = await forgetPassword(email);
-        if(message) setError(message)
-    }
-
-
-    const handleLogout = () => {
+	const handleLogout = () => {
 		logout();
 		navigate("/login");
 	};
 
 	return (
-		<AuthContext.Provider value={{ currentUser, setCurrentUser,name, setName, email, setEmail, password, setPassword, error, setError, handleSignUp, handleProvider, navigate, handleLogin, forgetPasswordHandler, handleLogout, userId }}>
+		<AuthContext.Provider
+			value={{
+				currentUser,
+				setCurrentUser,
+				name,
+				setName,
+				email,
+				setEmail,
+				password,
+				setPassword,
+				error,
+				setError,
+				handleSignUp,
+				handleProvider,
+				navigate,
+				handleLogin,
+				forgetPasswordHandler,
+				handleLogout,
+				userId,
+			}}
+		>
 			{props.children}
 		</AuthContext.Provider>
 	);

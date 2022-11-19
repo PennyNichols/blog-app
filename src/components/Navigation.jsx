@@ -5,10 +5,7 @@ import { GiNotebook } from "react-icons/gi";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Navigation = () => {
-
 	let { currentUser, handleLogout, navigate } = useContext(AuthContext);
-
-
 
 	return (
 		<Navbar bg="light" expand="lg">

@@ -7,7 +7,7 @@ import { BlogContext } from "../contexts/BlogContext";
 import defaultImg from "../assets/login-bg.jpg";
 import htmlToDraft from "html-to-draftjs";
 import { ContentState, EditorState } from "draft-js";
-import {Container} from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Likes from "../components/Likes";
 import CommentForm from "../components/CommentForm";
 import CommentCard from "../components/CommentCard";

@@ -5,8 +5,6 @@ import { ProfileContext } from "../contexts/ProfileContext";
 const About = () => {
 	const { profiles } = useContext(ProfileContext);
 
-    console.log(profiles)
-
 	return (
 		<div>
 			<div className="d-flex justify-content-center align-items-center">

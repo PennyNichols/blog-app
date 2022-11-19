@@ -10,16 +10,16 @@ export const CommentContext = createContext();
 const CommentProvider = ({ children }) => {
 	const { currentUser } = useContext(AuthContext);
 
-    const [commentText, setCommentText] = useState('')
-    const [blogId, setBlogId] = useState('')
-    const [comments, setComments] = useState([])
-	const [edit, setEdit] = useState(false)
-	const [updateId, setUpdateId] = useState('')
+	const [commentText, setCommentText] = useState("");
+	const [blogId, setBlogId] = useState("");
+	const [comments, setComments] = useState([]);
+	const [edit, setEdit] = useState(false);
+	const [updateId, setUpdateId] = useState("");
 
 	const current = new Date();
-    const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
-   
-
+	const date = `${
+		current.getMonth() + 1
+	}/${current.getDate()}/${current.getFullYear()}`;
 
 	const writeToDatabase = () => {
 		const commentRef = ref(db, "Comment");
@@ -27,10 +27,10 @@ const CommentProvider = ({ children }) => {
 		set(newCommentRef, {
 			comment: commentText,
 			author: currentUser.displayName,
-            userId: currentUser.uid,
+			userId: currentUser.uid,
 			blogId: blogId,
-            date: date,
-		})
+			date: date,
+		});
 		setCommentText("");
 	};
 
@@ -66,17 +66,15 @@ const CommentProvider = ({ children }) => {
 		update(ref(db, "Comment/" + updateId), {
 			comment: commentText,
 			author: currentUser.displayName,
-            userId: currentUser.uid,
+			userId: currentUser.uid,
 			blogId: blogId,
-            date: date,
+			date: date,
 		});
 		setCommentText("");
 		setEdit(false);
 		setUpdateId("");
 		toast.success("Comment Updated");
 	};
-
-	
 
 	return (
 		<CommentContext.Provider
@@ -91,7 +89,7 @@ const CommentProvider = ({ children }) => {
 				comments,
 				handleComment,
 				deleteComment,
-				updateComment
+				updateComment,
 			}}
 		>
 			{children}

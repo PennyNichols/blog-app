@@ -1,10 +1,19 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContext";
 
-
 const Login = () => {
-    const {email, setEmail, password, setPassword, error, handleProvider, navigate, handleLogin, forgetPasswordHandler } = useContext(AuthContext);
+	const {
+		email,
+		setEmail,
+		password,
+		setPassword,
+		error,
+		handleProvider,
+		navigate,
+		handleLogin,
+		forgetPasswordHandler,
+	} = useContext(AuthContext);
 
 	return (
 		<div className="p-5">
@@ -31,7 +40,7 @@ const Login = () => {
 					<Form.Text
 						style={{ cursor: "pointer" }}
 						className="muted text-primary"
-                        onClick={()=>forgetPasswordHandler(email)}
+						onClick={() => forgetPasswordHandler(email)}
 					>
 						Forget Password?
 					</Form.Text>

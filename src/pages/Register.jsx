@@ -3,18 +3,26 @@ import { Button, Container, Form } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Register = () => {
-    const { name, setName, email, setEmail, password, setPassword, error, handleSignUp, handleProvider, navigate } = useContext(AuthContext);
-	
+	const {
+		name,
+		setName,
+		email,
+		setEmail,
+		password,
+		setPassword,
+		error,
+		handleSignUp,
+		handleProvider,
+		navigate,
+	} = useContext(AuthContext);
 
-
-	
 	return (
 		<div className="login p-5">
 			<Container
 				className="container-fluid p-4"
 				style={{ backgroundColor: "#d3d3d3e2", width: "24rem" }}
 			>
-                { error && <p className='text-danger' >{error}</p>}
+				{error && <p className="text-danger">{error}</p>}
 				<h2 className="pb-3">Sign Up</h2>
 				<Form>
 					<Form.Control

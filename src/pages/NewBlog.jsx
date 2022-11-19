@@ -1,10 +1,8 @@
-import React from 'react'
-import BlogForm from '../components/BlogForm'
+import React from "react";
+import BlogForm from "../components/BlogForm";
 
 const NewBlog = () => {
-  return (
-    <BlogForm/> 
-  )
-}
+	return <BlogForm />;
+};
 
-export default NewBlog
+export default NewBlog;
