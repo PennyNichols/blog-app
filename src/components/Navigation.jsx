@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GiNotebook } from "react-icons/gi";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Navigation = () => {
-	let { currentUser, handleLogout, navigate } = useContext(AuthContext);
-
+	let { currentUser, handleLogout } = useContext(AuthContext);
+	const navigate = useNavigate()
 	return (
 		<Navbar bg="light" expand="lg">
 			<Container>

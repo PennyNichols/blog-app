@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { useNavigation } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Register = () => {
@@ -13,8 +14,9 @@ const Register = () => {
 		error,
 		handleSignUp,
 		handleProvider,
-		navigate,
 	} = useContext(AuthContext);
+
+	const navigate = useNavigation()
 
 	return (
 		<div className="login p-5">
@@ -47,11 +49,11 @@ const Register = () => {
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 
-					<Button className="my-2 w-100" type="button" onClick={handleSignUp}>
+					<Button className="my-2 w-100" type="button" onClick={()=>handleSignUp(navigate)}>
 						Sign Up
 					</Button>
 				</Form>
-				<Button className="w-100" type="button" onClick={handleProvider}>
+				<Button className="w-100" type="button" onClick={()=>handleProvider(navigate)}>
 					Continue with Google
 				</Button>
 				<p className="mt-2">

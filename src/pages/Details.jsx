@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBinFill } from "react-icons/ri";
@@ -27,7 +27,7 @@ const Details = () => {
 		like,
 		date,
 	} = state;
-	const { currentUser, navigate } = useContext(AuthContext);
+	const { currentUser } = useContext(AuthContext);
 	const { comments } = useContext(CommentContext);
 	const {
 		setTitle,
@@ -41,6 +41,8 @@ const Details = () => {
 	} = useContext(BlogContext);
 	// const { blogs } = useContext(BlogContext);
 	// const {id} = useParams()
+
+	const navigate = useNavigate()
 
 	const handleUpdate = () => {
 		setTitle(title);
@@ -92,7 +94,7 @@ const Details = () => {
 						<button
 							style={{ backgroundColor: "transparent", border: "none" }}
 							type="button"
-							onClick={() => deleteBlog(id)}
+							onClick={() => deleteBlog(id, navigate)}
 						>
 							<RiDeleteBinFill style={{ fontSize: "3rem", color: "red" }} />
 						</button>

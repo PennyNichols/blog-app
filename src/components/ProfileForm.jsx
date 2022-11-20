@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { ProfileContext } from "../contexts/ProfileContext";
 
@@ -29,13 +30,15 @@ const ProfileForm = () => {
 
 	setIsFound(found);
 
+	const navigate = useNavigate()
+
 	return (
 		<Container
 			className="container-fluid p-4 rounded shadow-lg"
 			style={{ backgroundColor: "#d3d3d3e2", width: "24rem" }}
 		>
 			<h2 className="pb-3">Profile Details</h2>
-			<Form onSubmit={handleSubmit}>
+			<Form onSubmit={()=>handleSubmit(navigate)}>
 				<Form.Control
 					type="text"
 					placeholder="Hometown"

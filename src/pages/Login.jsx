@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Login = () => {
@@ -10,10 +11,11 @@ const Login = () => {
 		setPassword,
 		error,
 		handleProvider,
-		navigate,
 		handleLogin,
 		forgetPasswordHandler,
 	} = useContext(AuthContext);
+
+	const navigate = useNavigate()
 
 	return (
 		<div className="p-5">
@@ -45,11 +47,11 @@ const Login = () => {
 						Forget Password?
 					</Form.Text>
 					<br />
-					<Button className="my-2 w-100" type="button" onClick={handleLogin}>
+					<Button className="my-2 w-100" type="button" onClick={()=>handleLogin(navigate)}>
 						Login
 					</Button>
 				</Form>
-				<Button className="w-100" type="button" onClick={handleProvider}>
+				<Button className="w-100" type="button" onClick={()=>handleProvider(navigate)}>
 					Continue with Google
 				</Button>
 				<p className="mt-2">

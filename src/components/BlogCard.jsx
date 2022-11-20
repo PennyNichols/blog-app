@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import defaultImg from "../assets/login-bg.jpg";
 import Likes from "./Likes";
+import { useNavigate } from "react-router-dom";
 
 const BlogCard = (props) => {
 	const {
@@ -17,7 +18,8 @@ const BlogCard = (props) => {
 		like,
 		commentCount,
 	} = props.blog;
-	let { navigate, currentUser } = useContext(AuthContext);
+	let { currentUser } = useContext(AuthContext);
+	const navigate = useNavigate()
 	const handleDetails = () => {
 		navigate(`/details/${id}`, {
 			state: {

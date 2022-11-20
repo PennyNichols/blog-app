@@ -4,13 +4,11 @@ import { ref, set, push, onValue, remove, update } from "firebase/database";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "./AuthContext";
-import { useNavigate } from "react-router-dom";
 
 export const ProfileContext = createContext();
 
 const ProfileProvider = ({ children }) => {
 	const { currentUser } = useContext(AuthContext);
-	const navigate = useNavigate();
 
 	const [imgUrl, setImgUrl] = useState("");
 	const [hometown, setHometown] = useState("");
@@ -50,7 +48,7 @@ const ProfileProvider = ({ children }) => {
 		});
 	}, []);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e, navigate) => {
 		e.preventDefault();
 		if (!edit && !isFound) {
 			writeToDatabase();
@@ -69,7 +67,7 @@ const ProfileProvider = ({ children }) => {
 		navigate("/about");
 	};
 
-	const deleteProfile = (id) => {
+	const deleteProfile = (id, navigate) => {
 		remove(ref(db, "Profile/" + id));
 		toast.error("Profile deleted");
 		navigate("/");

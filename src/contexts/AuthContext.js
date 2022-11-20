@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { logout, userObserver } from "../helpers/firebase";
 import {
 	registerUser,
@@ -20,17 +19,16 @@ const AuthProvider = (props) => {
 	const [error, setError] = useState(null);
 	const [userId, setUserId] = useState();
 
-	const navigate = useNavigate();
 
 	useEffect(() => userObserver(setCurrentUser), []);
 	useEffect(() => userObserver(setUserId), []);
 	
-	const handleSignUp = async () => {
+	const handleSignUp = async (navigate) => {
 		if (!name || !email || !password) {
 			setError("Invalid Entry");
 			return;
 		}
-		const message = await registerUser(email, password, name);
+		const message = await registerUser(name,email ,password  );
 		if (message) {
 			setError(message);
 		} else {
@@ -42,16 +40,16 @@ const AuthProvider = (props) => {
 		}
 	};
 
-	const handleProvider = () => {
+	const handleProvider = (navigate) => {
 		signUpProvider();
 		navigate("/");
 	};
-	const handleLogin = async (e) => {
+	const handleLogin = async (e, navigate) => {
 		if (!email || !password) {
 			setError("Invalid Entry");
 			return;
 		}
-		const message = await login(email, password);
+		const message = await login(email, password, navigate);
 		if (message) {
 			setError(message);
 		} else {
@@ -69,7 +67,7 @@ const AuthProvider = (props) => {
 		if (message) setError(message);
 	};
 
-	const handleLogout = () => {
+	const handleLogout = (navigate) => {
 		logout();
 		navigate("/login");
 	};
@@ -89,7 +87,6 @@ const AuthProvider = (props) => {
 				setError,
 				handleSignUp,
 				handleProvider,
-				navigate,
 				handleLogin,
 				forgetPasswordHandler,
 				handleLogout,

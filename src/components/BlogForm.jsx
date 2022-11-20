@@ -6,6 +6,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "draft-js/dist/Draft.css";
 import draftToHtml from "draftjs-to-html";
 import { convertToRaw } from "draft-js";
+import { useNavigate } from "react-router-dom";
 
 const BlogForm = () => {
 	const {
@@ -23,7 +24,7 @@ const BlogForm = () => {
 		setHeadline,
 	} = useContext(BlogContext);
 
-	console.log(body);
+	const navigate = useNavigate()
 
 	return (
 		<div>
@@ -33,7 +34,7 @@ const BlogForm = () => {
 					style={{ backgroundColor: "#d3d3d3e2", width: "40rem" }}
 				>
 					<h2 className="pb-3">Post</h2>
-					<Form onSubmit={handleSubmit}>
+					<Form onSubmit={()=>handleSubmit(navigate)}>
 						<Form.Control
 							type="text"
 							placeholder="Title"

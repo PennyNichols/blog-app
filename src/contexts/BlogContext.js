@@ -9,7 +9,7 @@ import { EditorState } from "draft-js";
 export const BlogContext = createContext();
 
 const BlogProvider = ({ children }) => {
-	const { currentUser, navigate } = useContext(AuthContext);
+	const { currentUser } = useContext(AuthContext);
 
 	const [title, setTitle] = useState("");
 	const [imgUrl, setImgUrl] = useState("");
@@ -59,7 +59,7 @@ const BlogProvider = ({ children }) => {
 		});
 	}, []);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e, navigate) => {
 		e.preventDefault();
 		if (!edit) {
 			writeToDatabase();
@@ -75,7 +75,7 @@ const BlogProvider = ({ children }) => {
 		navigate("/");
 	};
 
-	const deleteBlog = (id) => {
+	const deleteBlog = (id, navigate) => {
 		remove(ref(db, "Blog/" + id));
 		toast.error("Blog deleted");
 		navigate("/");
