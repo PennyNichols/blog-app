@@ -108,14 +108,14 @@ const BlogProvider = ({ children }) => {
 				like: +blog.like + 1,
 				likes: [...blog.likes, currentUser.uid],
 			});
-			console.log("liked");
+			console.log("liked",blog.likes);
 		} else {
 			update(ref(db, "Blog/" + blog.id), {
 				...blog,
 				like: +blog.like - 1,
 				likes: blog.likes.filter((user) => user !== currentUser.uid),
 			});
-			console.log("unliked");
+			console.log("unliked",blog.likes);
 		}
 	};
 

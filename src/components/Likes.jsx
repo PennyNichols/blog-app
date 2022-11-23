@@ -24,7 +24,15 @@ const Likes = ({ blog }) => {
 					cursor: "pointer",
 					color: likes?.includes(currentUser.uid) ? "red" : null,
 				}}
+				
+				
+				
+				
+				
 				onClick={() => handleLike(blog)}
+				// !!!!!!1
+
+
 			/>
 			<p className="mb-1">{like}</p>
 			<i

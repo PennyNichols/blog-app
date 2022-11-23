@@ -59,6 +59,7 @@ const Details = () => {
 		setEdit(true);
 		navigate("/new-blog");
 	};
+	console.log(state)
 
 	return (
 		<>
